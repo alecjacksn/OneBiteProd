@@ -1,0 +1,96 @@
+    /* Position and sizing of burger button */
+    .bm-burger-button {
+        position: fixed;
+        width: 24px;
+        height: 15px;
+        left: 95vw;
+        top: 25px;
+        /* margin: 0 15vw 0 0 !important;         */
+      }
+       
+      /* Color/shape of burger icon bars */
+      .bm-burger-bars {
+        background: white;
+        height: 1px !important;
+        /* margin-right: 50vw !important; */
+      }
+       
+      /* Position and sizing of clickable cross button */
+      .bm-cross-button {
+        height: 30px;
+        width: 30px;
+        margin-right: 10px !important;
+        position: relative;
+        z-index: 125;
+      }
+       
+      /* Color/shape of close button cross */
+      .bm-cross {
+        background: black;
+        
+      }
+       
+      /* General sidebar styles */
+      .bm-menu {
+        background: rgb(239,239,239);
+        box-shadow: 1px 1px 10px rgba(0,0,0,.2);          
+        border-top-left-radius: 10px;
+        padding: 2.5em .5em 0;
+        font-size: 1.15em;
+        position: relative;
+        z-index: 100 !important;
+      }
+       
+      /* Morph shape necessary with bubble or elastic */
+      .bm-morph-shape {
+        fill: rgb(239,239,239);
+        position: relative;
+        z-index: 100 !important;
+      }
+       
+      /* Wrapper for item list */
+      .bm-item-list {
+        color: #b8b7ad;
+        padding: 0.8em;
+        position: relative;
+        z-index: 100 !important;
+      }
+       
+      /* Styling of overlay */
+      .bm-overlay {
+        background: rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 100 !important;
+      }
+
+      .burger-basic-nav{
+        margin: 15px 0;
+        color: rgba(0,0,0, .5);
+        font-size: 1rem;
+        font-weight: 400;
+      }
+
+      .burger-oneBite{
+        margin-bottom: 25px;
+        margin-top: 30px;
+        font-size: 1.25rem;
+        color: rgba(0,0,0, .8);
+        font-weight: 500;
+
+      }
+
+      .burger-precision{      
+        margin-top: 30px;
+        margin-bottom: 25px;
+        font-size: 1.25rem;
+        color: rgba(0,0,0, .8);
+        font-weight: 500;
+      }
+
+      .burger-link{
+        color: rgba(0,0,0, .5);
+        font-size: 1rem;
+        margin: 15px 5px 5px 20px;
+        font-weight: 100;
+      }
+      
