@@ -30,6 +30,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:server": "node server",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
@@ -40,6 +41,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "homepage": "https://onebite.com/#/",
-  "proxy": "http://localhost:3232"
+  "proxy": "http://localhost:3232/"
 }

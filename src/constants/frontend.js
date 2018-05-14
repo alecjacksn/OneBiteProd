@@ -1,8 +1,8 @@
 const FRONTEND_DEV_URLS = [ 'http://localhost:3000' ];
 
 const FRONTEND_PROD_URLS = [
-  'https://www.onebite.com/#/',
-  'https://onebite.com/#/'
+  'https://www.onebite.com/',
+  'https://onebite.com/'
 ];
 
 module.exports = process.env.NODE_ENV === 'production'

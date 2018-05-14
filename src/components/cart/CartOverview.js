@@ -28,7 +28,7 @@ class Cart extends Component {
   }
 
   onToken = token => {
-    axios.post('/stripe',
+    axios.post('/api/stripe',
       {
         stripeToken: token.id,
         amount: SubTotalCalculator(getProductsInCart(this.props.cart)) ? Number(SubTotalCalculator(getProductsInCart(this.props.cart)).toString() + '00') : null,

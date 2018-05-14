@@ -32,7 +32,7 @@ app.use(cors());
 // configureRoutes(app);
 
 
-app.post('/stripe', (req, res) => {
+app.post('/api/stripe', (req, res) => {
   const stripeToken = req.body.stripeToken
   console.log("STRIPE TOKEN", stripeToken)
   console.log("amount", req.body.amount)
