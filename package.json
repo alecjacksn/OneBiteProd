@@ -41,5 +41,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "proxy": "http://localhost:3232/"
+  "proxy": "http://localhost:3232"
 }
