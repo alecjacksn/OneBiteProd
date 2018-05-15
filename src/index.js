@@ -11,11 +11,11 @@ import HttpsRedirect from 'react-https-redirect';
 
 ReactDOM.render(
     <Provider store={store} >
-        <HttpsRedirect>
+        {/* <HttpsRedirect> */}
             <HashRouter>
                 <App />
             </HashRouter>
-        </HttpsRedirect>
+        {/* </HttpsRedirect> */}
     </Provider>
     , document.getElementById('root'));
 
