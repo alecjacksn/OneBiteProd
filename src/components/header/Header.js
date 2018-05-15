@@ -1,14 +1,21 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd';
-import './header.css'
 import { Link } from 'react-router-dom'
 // import { Icon } from 'antd'
 import { connect } from 'react-redux'
 import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart } from '../../ducks/reducer'
 import OneBiteLogo from '../../images/OneBite Logo 1500 px 600 dpi.png'
-
+import Burger from '../burger/Burger'
 
 class Header extends Component {
+  constructor(){
+    super()
+
+    this.state = {
+      tabOpen: false
+    }
+
+  }
 
 
   // componentDidMount(){
@@ -57,36 +64,55 @@ class Header extends Component {
 
 
   render() {
-  
+
 
     return (
-
-      <Row>
-        {/* <span>{this.state.cartLength}TESTING</span> */}
-        <Col span={6} push={18}>
-          <div className="header-container">
-            <Link to="/onebite/products">Products</Link>
-            {/* <Icon type="user" /> */}
-            <span>About</span>
-            <Link to="/cart">
-              {/* <Icon type="shopping-cart"
-                    style={{
-                      color: 'rgba(95,177,87, 1)',
-                      fontSize: '1.2em',
-                      fontWeight: '400',     
-                      
-                    }} /> */}
-              Cart
-                  {this.props.cart ? <span>({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
-          </div>
-        </Col>
-        <Col span={18} pull={6}>
-          <div style={{width: '125px', height: '125px'}}>
+      <div className="header-container">
+        <div className="header-main-div">
+          <div className="header-logo-div">
             <Link style={{ color: 'white' }} to="/"><img src={OneBiteLogo} alt="OneBite Logo" className="header-logo" /></Link>
           </div>
-        </Col>
+          <div className="header-nav-container">
+            <div className="header-nav-main-div">
+              <Link to="/onebite/products">Products</Link>
+              <span>About</span>
+              <Link to="/cart">
+                Cart{this.props.cart ? <span>({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
+            </div>
+                <Burger tabOpen={this.state.tabOpen} />
+          </div>
+        </div>
+      </div>
 
-      </Row>
+
+
+
+      // <Row>
+      //   {/* <span>{this.state.cartLength}TESTING</span> */}
+      //   <Col span={6} push={18}>
+      //     <div className="header-container">
+      //       <Link to="/onebite/products">Products</Link>
+      //       {/* <Icon type="user" /> */}
+      //       <span>About</span>
+      //       <Link to="/cart">
+      //         {/* <Icon type="shopping-cart"
+      //               style={{
+      //                 color: 'rgba(95,177,87, 1)',
+      //                 fontSize: '1.2em',
+      //                 fontWeight: '400',     
+
+      //               }} /> */}
+      //         Cart
+      //             {this.props.cart ? <span>({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
+      //     </div>
+      //   </Col>
+      //   <Col span={18} pull={6}>
+      //     <div style={{ width: '125px', height: '125px' }}>
+      //       <Link style={{ color: 'white' }} to="/"><img src={OneBiteLogo} alt="OneBite Logo" className="header-logo" /></Link>
+      //     </div>
+      //   </Col>
+
+      // </Row>
 
     )
   }

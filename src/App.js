@@ -19,10 +19,10 @@ class App extends Component {
 
   render() {
     return (
-      <Layout>
+      <Layout breakpoint='740px'>
         <TopWarningBar />
-        <Burger tabOpen={this.state.tabOpen} />
-        <Header style={{ padding: '0 75px 0 75px', position: 'fixed', width: '100%', background: 'rgba(0,0,0, 1)', boxShadow: "0px 2px 15px rgba(0,0,0, .6)", borderBottom: '4px solid rgb(76,73,140)', zIndex: 100 }}>
+        {/* <Burger tabOpen={this.state.tabOpen} /> */}
+        <Header className="app-header-comp">
           <HeaderComp />
 
         </Header>

@@ -59,11 +59,21 @@ html, body {
 
 
 
-.header-logo{
-  max-width: 100%;
-  max-height: 100%;
-  margin-top: 15px;
+/*                App.js        **********************************   */
+
+
+.app-header-comp{
+  padding: 0 75px 0 75px;
+  position: fixed;
+  width: 100%;
+  background: rgba(0,0,0, 1);
+  box-shadow: 0px 2px 15px rgba(0,0,0, .6); 
+  border-bottom: 4px solid rgb(76,73,140);
+  z-index: 100;
 }
+
+
+
 
 
 
@@ -199,7 +209,6 @@ html, body {
   height: 90vh;
   background: rgb(91, 89, 138);
   margin: 0;
-  padding-top: 125px;
   position: relative;
   /* z-index: 5; */
   
@@ -1250,7 +1259,182 @@ html, body {
 
 
 
-/*                  media querys (phone)            */
+/*                Header.js      ***********************************/
+
+
+.header-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.header-main-div{
+  display: flex;
+  justify-content: space-between;  
+  height: 50px;
+  width: 100%;
+  /* background: red; */
+}
+
+.header-logo{
+  max-width: 125px;
+  max-height: auto;
+  margin-top: 15px;
+}
+
+
+.header-logo-div{
+  width: 50%;  
+
+}
+
+.header-nav-container{
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  /* padding-right: 35px; */
+  
+}
+
+
+.header-nav-main-div{
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 35px;
+}
+
+
+.header-nav-main-div > a{
+  color: white;
+  font-size: 16px;
+  
+
+}
+
+.header-nav-main-div span{
+  color: white;
+  font-size: 16px;
+
+}
+
+
+
+/* 
+.header-container{
+  display: flex;
+  justify-content: space-around;   
+  margin: 0 0 0 30px; 
+} */
+
+.header-container span{
+  /* margin-right: 15px; */
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+a {
+  color: inherit;    
+  text-decoration: none !important;
+}
+
+/* .header-container > a {  
+  color: white;;
+  
+} */
+
+/* .header-container > a:hover {
+  margin-right: 15px;
+  color: rgba(0,0,0, 1);
+  color: red;;
+  
+} */
+
+
+
+
+/*************************************************/
+
+/******************       media querys (half)       ********************************/
+
+/*************************************************/
+
+@media screen and (max-width: 1150px) {
+  .home-img{
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: -40px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* border-radius: 10px; */
+  }
+
+
+}
+
+
+
+
+/*************************************************/
+
+/******************       media querys (Ipad)       ********************************/
+
+/*************************************************/
+
+
+
+@media screen and (max-width: 640px) {
+  .header-nav-main-div {      
+    display: none;
+  }
+
+
+
+  .app-header-comp{
+    padding: 0 50px 0 25px;
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0, 1);
+    box-shadow: 0px 2px 15px rgba(0,0,0, .6); 
+    border-bottom: 4px solid rgb(76,73,140);
+    z-index: 100;
+  }
+
+
+  .home-img{
+    max-width: 100%;
+    max-height: 100%;
+    margin-top: -20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* border-radius: 10px; */
+  }
+
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+/*************************************************/
+
+/******************       media querys (phone)       ********************************/
+
+/*************************************************/
+
+
+
 
 
 
@@ -1263,6 +1447,17 @@ html, body {
     
     
   }
+
+  .home-img{
+    max-width: 100%;
+    max-height: 100%;
+    
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* border-radius: 10px; */
+  }
+
 
 }
 
