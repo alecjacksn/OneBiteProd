@@ -4,7 +4,7 @@
         width: 24px;
         height: 15px;
         /* left: 95vw; */
-        top: 25.6px;
+        top: 26px;
         /* margin: 0 15vw 0 0 !important;         */
       }
        
@@ -19,7 +19,8 @@
       .bm-cross-button {
         height: 30px;
         width: 30px;
-        margin-right: 10px !important;
+        margin-right: 20px !important;
+        margin-top: 5px !important;
         position: relative;
         z-index: 125;
       }
@@ -27,6 +28,8 @@
       /* Color/shape of close button cross */
       .bm-cross {
         background: black;
+        width: 4px !important;        
+        height: 3px !important;
         
       }
        

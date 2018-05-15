@@ -24,8 +24,8 @@ class Video extends Component {
           muted={true}
           width='85%'
           height='85%'
-          controls={this.state.controls}
-          style={{ cursor: 'pointer', paddingBottom: '50px', paddingTop: '50px' }}
+          controls={this.state.controls}          
+          className="home-video-player"
         />
       </div>
     )
