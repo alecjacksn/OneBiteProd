@@ -71,7 +71,7 @@ class Home extends Component {
         </div> */}
         {/* <Movements /> */}
         <Products />
-        <Evolution />
+        {/* <Evolution /> */}
       </div>
     );
   }

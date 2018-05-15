@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 class Products extends Component {
     render() {
         return (
-            <div style={{ padding: '30px 70px' }}>
+            <div className="products-parent">
                 <div className="products-container">
                     <div className="products-main-div">
                         <div className="products-left-nav">
