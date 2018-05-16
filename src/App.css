@@ -697,8 +697,8 @@ html, body {
 .overview-container{
   background: white;
   width: 24%;
-  min-height: 250px !important;
-  height: 100%;
+  min-height: 300px !important;
+  height: auto;
   border: 1px solid rgba(0,0,0, .2);
   border-bottom-width: 4px;
   border-right-width: 2px;
@@ -768,7 +768,8 @@ html, body {
   align-items: flex-start;
   flex-direction: column;
   border-top: 1px solid rgba(0,0,0, .4);
-  height: 100px;
+  min-height: 200px;
+  height: auto;
   width: 100%; 
 }
 

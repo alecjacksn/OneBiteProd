@@ -12,22 +12,32 @@ import JuanOliver from './components/precision/JuanOliver'
 import Laboratory from './components/precision/Laboratory'
 import Philosophy from './components/precision/Philosophy'
 import Products from './components/onebite/products/Products'
+import ReactGA from 'react-ga';
+
+
+export function fireTracking(nextState) {
+
+    const { pathname } = nextState.location // this gives you the next URL
+
+     ReactGA.pageview(pathname)
+
+   }
 
 export default (
     <Switch>
         {/* EMPLOYEE ROUTES */}
-        <Route exact path='/' component={Home} />
-        <Route path='/cart' component={Cart} />
-        <Route path='/contact' component={Contact} />
-        <Route path='/events' component={Events} />
-        <Route path='/onebite/products' component={Products} />
-        <Route path='/onebite/system' component={System} />
-        <Route path='/onebite/functions' component={Functions} />
-        <Route path='/onebite/instructions' component={Instructions} />
-        <Route path='/onebite/partners' component={Partners} />
-        <Route path='/Juan-Oliver' component={JuanOliver} />
-        <Route path='/laboratory' component={Laboratory} />
-        <Route path='/philosophy' component={Philosophy} />
+        <Route exact path='/' onEnter={ fireTracking } component={Home} />
+        <Route path='/cart' onEnter={ fireTracking } component={Cart} />
+        <Route path='/contact' onEnter={ fireTracking } component={Contact} />
+        <Route path='/events' onEnter={ fireTracking } component={Events} />
+        <Route path='/onebite/products' onEnter={ fireTracking } component={Products} />
+        <Route path='/onebite/system' onEnter={ fireTracking } component={System} />
+        <Route path='/onebite/functions' onEnter={ fireTracking } component={Functions} />
+        <Route path='/onebite/instructions' onEnter={ fireTracking } component={Instructions} />
+        <Route path='/onebite/partners' onEnter={ fireTracking } component={Partners} />
+        <Route path='/Juan-Oliver' onEnter={ fireTracking } component={JuanOliver} />
+        <Route path='/laboratory' onEnter={ fireTracking } component={Laboratory} />
+        <Route path='/philosophy' onEnter={ fireTracking } component={Philosophy} />
         {/* <Route render={() => {
             return (<div>I'm sorry, the page you're looking for cannot be found. A highly trained monkey is working to build the page as you read this.
         </div>)

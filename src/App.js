@@ -6,6 +6,15 @@ import { Layout } from 'antd';
 import HeaderComp from './components/header/Header'
 import Burger from './components/burger/Burger'
 import TopWarningBar from './components/help/TopWarningBar'
+import ReactGA from 'react-ga';
+import ReactPixel from 'react-facebook-pixel';
+
+
+ReactGA.initialize('UA-119239845-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+ReactPixel.init('1978219095752607', {}, { debug: true, autoConfig: false });
+ReactPixel.pageView();
+
 const { Header, Footer, Content } = Layout;
 class App extends Component {
   constructor() {

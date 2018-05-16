@@ -9,7 +9,7 @@ const express = require('express')
   , bodyParser = require('body-parser')
   , cors = require('cors')
 
-var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
 
 const app = express();
 
@@ -19,7 +19,7 @@ const postStripeCharge = res => (stripeErr, stripeRes) => {
     console.log("ERRROR", stripeErr)
     res.status(500).send({ error: stripeErr });
   } else {
-    console.log("SUCCESS", stripeRes)
+    // console.log("SUCCESS", stripeRes)
     res.status(200).send({ success: stripeRes });
   }
 }
@@ -38,14 +38,16 @@ app.get('*', (req, res)=>{
 
 app.post('/api/stripe', (req, res) => {
   const stripeToken = req.body.stripeToken
+  const stripeEmail = req.body.stripeEmail
   console.log("STRIPE TOKEN", stripeToken)
-  console.log("amount", req.body.amount)
-  console.log("description", req.body.description)
+  console.log("REQ . BODY", req.body)
+  console.log("EMAILLLL", stripeEmail)
   stripe.charges.create({
     amount: req.body.amount,
     currency: req.body.currency,
     source: stripeToken,
-    description: req.body.description
+    description: req.body.description, 
+    receipt_email: stripeEmail
   }, postStripeCharge(res))
 });
 
