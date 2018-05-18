@@ -16,8 +16,7 @@ const successPayment = (redirectHome, clearReduxCart) => {
   return redirectHome(true)
 };
 
-const errorPayment = data => {
-  console.log("IT WAS AN ERROR HERE", data)
+const errorPayment = data => {  
   alert('Payment Error', data);
 };
 

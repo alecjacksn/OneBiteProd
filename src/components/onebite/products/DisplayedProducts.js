@@ -26,14 +26,13 @@ class DisplayedProducts extends Component {
             this.props.updateItem3Quantity(++currentItem)
             this.props.showItemInCart(3, true)
         }
-        if(localStorage.getItem('cart') != null){
+        if(localStorage.getItem('cart') != null){        
             var cart = localStorage.getItem('cart').split(',')
             cart.push(item.toString())
             this.props.addToCart(cart)
             localStorage.setItem('cart', cart)
             return success()
-        } else {
-            console.log("IT WAS FALSE")
+        } else {         
             localStorage.setItem('cart', item.toString())
             this.props.addToCart(item.toString())
             return success()

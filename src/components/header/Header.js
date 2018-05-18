@@ -30,8 +30,6 @@ class Header extends Component {
     var cart = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : null
     cart ?
       cart.reduce(function (n, person) {
-        console.log("NNNNNNNNNN", n)
-        console.log("PERSONNN", person)
         if (person === '1') {
           console.log("THIS IS HIT")
           ++item1

@@ -21,7 +21,12 @@ const HIDE_WARNING = 'HIDE_WARNING'
 
 
 export function addToCart(item) {
-  // console.log("THIS HIT", item)
+
+  if(item[0] == ""){
+    console.log("REDUCER ADD TO CARRT", item.shift())
+  } else {
+    console.log("FALSE REDUCER ADD TO CART", item)
+  }
   return {
     type: UPDATE_CART,
     payload: item
@@ -37,24 +42,21 @@ export function clearReduxCart() {
 }
 
 
-export function updateItem1Quantity(value) {
-  console.log("REDUCER HIT", value)
+export function updateItem1Quantity(value) {  
   return {
     type: UPDATE_ITEM1_QUANTITY,
     payload: value
   }
 }
 
-export function updateItem2Quantity(value) {
-  console.log("REDUCER HIT", value)
+export function updateItem2Quantity(value) {  
   return {
     type: UPDATE_ITEM2_QUANTITY,
     payload: value
   }
 }
 
-export function updateItem3Quantity(value) {
-  console.log("REDUCER HIT", value)
+export function updateItem3Quantity(value) {  
   return {
     type: UPDATE_ITEM3_QUANTITY,
     payload: value
@@ -93,8 +95,6 @@ export function hideWarning() {
 
 
 export default function reducer(state = initialState, action) {
-  console.log("action", action.type)
-  console.log("paylod", action.payload)
   switch (action.type) {
 
     case UPDATE_CART:

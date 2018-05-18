@@ -14,18 +14,16 @@ class Cart extends Component {
     this.saveCart = this.saveCart.bind(this)
   }
 
-  updateQuantity(id, input) {
-    console.log("Input", input)
-    var inputForParam = input ? input : 0
-    console.log("id", id)
+  updateQuantity(id, input) {    
+    var inputForParam = input ? input : 0    
     if (id === 1) {
-      this.props.updateItem1Quantity(Number(input))
+      this.props.updateItem1Quantity(Number(inputForParam))
     }
     if (id === 2) {
       this.props.updateItem2Quantity(Number(inputForParam))
     }
     if (id === 3) {
-      this.props.updateItem3Quantity(Number(input))
+      this.props.updateItem3Quantity(Number(inputForParam))
     }
   }
 
@@ -33,14 +31,12 @@ class Cart extends Component {
     var theCart11 = this.props.cart
   }
 
-  saveCart(arr) {
-    console.log("ARRRRR", arr)
+  saveCart(arr) {    
     localStorage.setItem('cart', arr)
     return this.props.addToCart(arr)
   }
 
   clearCart(id){
-    console.log("ID ID ID ID ID", id)
     var cart = this.props.cart
     var filteredArray = _.without(cart, id.toString())
     if(id === 1){
@@ -54,6 +50,11 @@ class Cart extends Component {
     if(id === 3){
       this.props.updateItem3Quantity(0)
       this.props.showItemInCart(id, false)
+    }    
+    if(filteredArray[0] === ''){
+      var testerArray = filteredArray.shift()
+      
+    } else {
     }
     return this.saveCart(filteredArray)
   }
@@ -98,14 +99,12 @@ class Cart extends Component {
         }
         return this.saveCart(newCartArray[0])
       }
-    }
-    console.log("NEW CART ARRAY", newCartArray[0])
+    }    
   }
 
 
 
-  countNumberOfItems(cart) {
-    console.log("CART", cart)
+  countNumberOfItems(cart) {    
     // console.log("IS ARRAY FUNCTION", Array.isArray(cart) ? cart : cart.split(" "))
     if (cart) {
       if (cart.length >= 0) {
@@ -115,8 +114,7 @@ class Cart extends Component {
   }
 
   render() {
-
-    console.log("LOCAL STORAGEEEE", localStorage.getItem('cart'))
+    
     return (
       <div className="cart-home-container">
         <div style={{ textAlign: 'right' }}>
