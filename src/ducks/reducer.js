@@ -22,11 +22,6 @@ const HIDE_WARNING = 'HIDE_WARNING'
 
 export function addToCart(item) {
 
-  if(item[0] == ""){
-    console.log("REDUCER ADD TO CARRT", item.shift())
-  } else {
-    console.log("FALSE REDUCER ADD TO CART", item)
-  }
   return {
     type: UPDATE_CART,
     payload: item
