@@ -50,6 +50,14 @@ class Cart extends Component {
     return this.redirectHomeFunction(true)
   };
 
+  errorPayment(data) {
+    console.log("IT WAS AN ERROR HERE", data)
+    alert('Payment Error', data);
+    localStorage.clear()
+    this.props.clearReduxCart()
+    return this.redirectHomeFunction(true)
+  };
+
   onToken = (token) => {
     console.log("TOKENNNN", token)
     var headers = {
@@ -66,30 +74,30 @@ class Cart extends Component {
         stripeEmail: token.email
 
       }).then(response => {
-        console.log("TOKEN.EMAIL", token.email)
-        console.log("CARD NAME", token.card.name)
-        console.log("RESPONSE FROM API/STRIPE", response)
-        axios.post('https://api3.getresponse360.com/v3/contacts',
-          {
-            "name": token.card.name,
-            "email": token.email,
-            "campaign": {
-              "campaignId": this.state.Occupation
-          }, headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "X-Auth-Token": "e046bc4a0c1ed2e2e64bcbe35be21b84"
-          }
+        console.log("RESPONSE", response)
+        return this.successPayment()
+        // console.log("TOKEN.EMAIL", token.email)
+        // console.log("CARD NAME", token.card.name)
+        // console.log("RESPONSE FROM API/STRIPE", response)
+        // axios.post('https://api3.getresponse360.com/v3/contacts',
+        //   {
+        //     "name": token.card.name,
+        //     "email": token.email,
+        //     "campaign": {
+        //       "campaignId": this.state.Occupation
+        //     }, headers: {
+        //       "Content-Type": "application/json",
+        //       "Access-Control-Allow-Origin": "http://localhost:3000",
+        //       "X-Auth-Token": "e046bc4a0c1ed2e2e64bcbe35be21b84"
+        //     }
 
-          }).then(res => {
-            this.successPayment()
-            console.log("RESPONSE", res)
-          })
+        //   }).then(res => {
+
+        //   })
 
       }).catch(err => {
-        this.successPayment()
         console.log("ERROR", err)
-        alert("There was an error. Please contact support@onebite.com", err)
+        return this.errorPayment()
       });
   }
 
