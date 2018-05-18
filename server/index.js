@@ -9,7 +9,7 @@ const express = require('express')
   , bodyParser = require('body-parser')
   , cors = require('cors')
 
-var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 
 const app = express();
 app.use(cors());
