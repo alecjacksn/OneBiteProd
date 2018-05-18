@@ -9,9 +9,14 @@ const express = require('express')
   , bodyParser = require('body-parser')
   , cors = require('cors')
 
-var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
 
 const app = express();
+app.use(cors());
+
+
+app.use(express.static(`${__dirname}/../build`));
+app.use(bodyParser.json());
 
 
 const postStripeCharge = res => (stripeErr, stripeRes) => {
@@ -24,9 +29,6 @@ const postStripeCharge = res => (stripeErr, stripeRes) => {
   }
 }
 
-app.use(express.static(`${__dirname}/../build`));
-app.use(bodyParser.json());
-app.use(cors());
 
 const path = require('path')
 app.get('*', (req, res)=>{

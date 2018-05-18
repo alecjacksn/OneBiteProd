@@ -75,25 +75,25 @@ class Cart extends Component {
 
       }).then(response => {
     
-        // console.log("TOKEN.EMAIL", token.email)
-        // console.log("CARD NAME", token.card.name)
-        // console.log("RESPONSE FROM API/STRIPE", response)
-        // axios.post('https://api3.getresponse360.com/v3/contacts',
-        //   {
-        //     "name": token.card.name,
-        //     "email": token.email,
-        //     "campaign": {
-        //       "campaignId": this.state.Occupation
-        //     }, headers: {
-        //       "Content-Type": "application/json",
-        //       "Access-Control-Allow-Origin": "http://localhost:3000",
-        //       "X-Auth-Token": "e046bc4a0c1ed2e2e64bcbe35be21b84"
-        //     }
+        console.log("TOKEN.EMAIL", token.email)
+        console.log("CARD NAME", token.card.name)
+        console.log("RESPONSE FROM API/STRIPE", response)
+        axios.post('https://api3.getresponse360.com/v3/contacts',
+          {
+            "name": token.card.name,
+            "email": token.email,
+            "campaign": {
+              "campaignId": this.state.Occupation
+            }, headers: {
+              "Content-Type": "application/json",      
+              "Access-Control-Allow-Origin": "https://onebite.com",        
+              "X-Auth-Token": "189d24e67342df4fb46cc030a9f5ca7c"
+            }
 
-        //   }).then(res => {
+          }).then(res => {
             console.log("RESPONSE", response)
             return this.successPayment()
-          // })
+          })
 
       }).catch(err => {
         console.log("ERROR", err)
