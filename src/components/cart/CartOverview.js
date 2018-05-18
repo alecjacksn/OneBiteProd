@@ -75,25 +75,25 @@ class Cart extends Component {
 
       }).then(response => {
     
-        console.log("TOKEN.EMAIL", token.email)
-        console.log("CARD NAME", token.card.name)
-        console.log("RESPONSE FROM API/STRIPE", response)
-        axios.post('https://api3.getresponse360.com/v3/contacts',
-          {
-            "name": token.card.name,
-            "email": token.email,
-            "campaign": {
-              "campaignId": this.state.Occupation
-            }, headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "http://localhost:3000",
-              "X-Auth-Token": "e046bc4a0c1ed2e2e64bcbe35be21b84"
-            }
+        // console.log("TOKEN.EMAIL", token.email)
+        // console.log("CARD NAME", token.card.name)
+        // console.log("RESPONSE FROM API/STRIPE", response)
+        // axios.post('https://api3.getresponse360.com/v3/contacts',
+        //   {
+        //     "name": token.card.name,
+        //     "email": token.email,
+        //     "campaign": {
+        //       "campaignId": this.state.Occupation
+        //     }, headers: {
+        //       "Content-Type": "application/json",
+        //       "Access-Control-Allow-Origin": "http://localhost:3000",
+        //       "X-Auth-Token": "e046bc4a0c1ed2e2e64bcbe35be21b84"
+        //     }
 
-          }).then(res => {
+        //   }).then(res => {
             console.log("RESPONSE", response)
             return this.successPayment()
-          })
+          // })
 
       }).catch(err => {
         console.log("ERROR", err)
@@ -138,14 +138,14 @@ class Cart extends Component {
               {/* {console.log("NEW FUNCTION TEST", `${SubTotalCalculator(getProductsInCart(this.props.cart)).toString() + '00'}`)} */}
               {/* {console.log("PRODUCTS ARRAY",getProductsInCart(this.props.cart))} */}
             </div>
-            <div className="overview-sub-div">
+            {/* <div className="overview-sub-div">
               <span>SHIPPING</span>
               <span>$0.00</span>
             </div>
             <div className="overview-sub-div">
               <span>ESTIMATED TAX</span>
               <span>$0.00</span>
-            </div>
+            </div> */}
           </div>
           <div className="overview-checkout">
             <div className="overview-total-spans">
