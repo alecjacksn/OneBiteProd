@@ -87,7 +87,6 @@ class Cart extends Component {
         //     }, headers: {
         //       "Content-Type": "application/json",      
         //       "Access-Control-Allow-Origin": "https://onebite.com",        
-        //       "X-Auth-Token": "189d24e67342df4fb46cc030a9f5ca7c"
         //     }
 
         //   }).then(res => {
@@ -142,10 +141,10 @@ class Cart extends Component {
               <span>SHIPPING</span>
               <span>$0.00</span>
             </div>
-            <div className="overview-sub-div">
+            {/* <div className="overview-sub-div">
               <span>ESTIMATED TAX</span>
               <span>$0.00</span>
-            </div>
+            </div> */}
           </div>
           <div className="overview-checkout">
             <div className="overview-total-spans">
