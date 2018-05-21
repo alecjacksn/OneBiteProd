@@ -12,7 +12,7 @@ import ReactPixel from 'react-facebook-pixel';
 
 ReactGA.initialize('UA-119239845-1');
 ReactGA.pageview(window.location.pathname + window.location.search);
-ReactPixel.init('1978219095752607', {}, { debug: true, autoConfig: false });
+ReactPixel.init(process.env.FACEBOOKPIX, {}, { debug: true, autoConfig: false });
 ReactPixel.pageView();
 
 const { Header, Footer, Content } = Layout;
