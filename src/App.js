@@ -9,7 +9,7 @@ import Burger from './components/burger/Burger'
 import TopWarningBar from './components/help/TopWarningBar'
 import ReactGA from 'react-ga';
 import ReactPixel from 'react-facebook-pixel';
-require('dotenv').config();
+
 
 ReactGA.initialize(process.env.GOOGLEA);
 ReactGA.pageview(window.location.pathname + window.location.search);
