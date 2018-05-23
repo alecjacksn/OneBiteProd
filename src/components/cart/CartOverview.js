@@ -177,7 +177,7 @@ class Cart extends Component {
               billingAddress
               receipt_email
               name="OneBite"
-              disabled={this.state.buttonDisabled}
+              disabled={true}
               onClick={() => this.onClickPay()}
             />
 

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import './App.css';
 import './reset.css'
@@ -8,11 +9,11 @@ import Burger from './components/burger/Burger'
 import TopWarningBar from './components/help/TopWarningBar'
 import ReactGA from 'react-ga';
 import ReactPixel from 'react-facebook-pixel';
-
+require('dotenv').config();
 
 ReactGA.initialize(process.env.GOOGLEA);
 ReactGA.pageview(window.location.pathname + window.location.search);
-ReactPixel.init(process.env.FACEBOOKPIX, {}, { debug: true, autoConfig: false });
+ReactPixel.init(process.env.REACT_APP_FACEBOOKPIX, {}, { debug: true, autoConfig: false });
 ReactPixel.pageView();
 
 const { Header, Footer, Content } = Layout;
@@ -26,7 +27,7 @@ class App extends Component {
   }
 
 
-  render() {
+  render() {    
     return (
       <Layout breakpoint='740px'>
         <TopWarningBar />
