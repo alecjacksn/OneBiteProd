@@ -14,7 +14,6 @@ var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 const app = express();
 app.use(cors());
 
-
 app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
 
@@ -41,9 +40,6 @@ configureServer(app);
 app.post('/api/stripe', (req, res) => {
   const stripeToken = req.body.stripeToken
   const stripeEmail = req.body.stripeEmail
-  console.log("STRIPE TOKEN", stripeToken)
-  console.log("REQ . BODY", req.body)
-  console.log("EMAILLLL", stripeEmail)
   stripe.charges.create({
     amount: req.body.amount,
     currency: req.body.currency,
