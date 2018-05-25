@@ -1365,6 +1365,129 @@ a {
 
 
 
+
+
+
+
+
+
+/*                Partners.js      ***********************************/
+
+
+
+
+
+
+.partners-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.partners-top-header-div{
+  width: 80vw;
+  height: 70px;  
+  margin-top: 25px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255,255,255)
+}
+
+
+
+.partners-dropdown-container{
+  width: 80vw;
+  height: auto;
+  margin: 25px 0;
+}
+
+.partners-header-div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 20px;
+}
+
+.partners-header-flag{
+  height: 40px;
+  width: 60px;
+  
+}
+
+
+
+
+
+
+
+.partners-content-container{
+  min-height: 150px;
+  height: auto;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.partners-company-logo-div{  
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 30%;
+  height: auto
+}
+
+.partners-company-logo{
+  height: 100px;
+  width: auto;
+  max-width: 200px;
+  margin-left: auto;
+	margin-right: auto;
+	display: block;
+  /* border-right: 1px solid rgba(0,0, 0, .2); */
+  /* padding-right: 25px; */
+}
+
+.partners-columbia-logo{
+  height: 100px;
+  width: auto;
+  max-width: 200px;
+  background: rgba(0,0,0, .5)
+}
+
+
+.arrow{
+  margin-top: 10px !important;
+}
+
+
+.partners-data-center-div{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 0 0 0 20px;
+}
+
+/* .partners-data-right-div{
+  max-width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+
+
+
 /*************************************************/
 
 /******************       media querys (half)       ********************************/
@@ -1475,6 +1598,8 @@ a {
     padding-bottom: 10px;
     padding-top: 10px;
   }
+
+  
 
 }
 
