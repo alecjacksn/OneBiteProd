@@ -1,12 +1,19 @@
+import axios from 'axios';
+
 const initialState = {
   cart: [],
-  item1: 0,
+  item1: '',
   item2: '',
   item3: '',
   displayItem1: false,
   displayItem2: false,
   displayItem3: false,
-  showWarning: true
+  showWarning: true,
+  orderObj: {},
+  orderRes: {},
+  tokenObj: {},
+  orderObjCreated: false,
+  userOccupation: ""
 }
 
 const UPDATE_CART = 'UPDATE_CART';
@@ -18,6 +25,52 @@ const DISPLAY_ITEM1 = 'DISPLAY_ITEM1'
 const DISPLAY_ITEM2 = 'DISPLAY_ITEM2'
 const DISPLAY_ITEM3 = 'DISPLAY_ITEM3'
 const HIDE_WARNING = 'HIDE_WARNING'
+const UPDATE_ORDER_OBJ = 'UPDATE_ORDER_OBJ'
+const UPDATE_ORDER_RES = 'UPDATE_ORDER_RES'
+const UPDATE_TOKEN_OBJ = 'UPDATE_TOKEN_OBJ'
+const UPDATE_USER_OCCUPATION = 'UPDATE_USER_OCCUPATION'
+
+
+
+export function updateOrderObj(obj) {
+  // const orderPush = axios.post('/api/create-order', obj)
+  //   .then(response => {
+  //     return response.data
+  //   })
+  return {
+    type: UPDATE_ORDER_OBJ,
+    payload: obj
+  }
+}
+
+
+export function updateOrderRes(obj) {
+  return {
+    type: UPDATE_ORDER_RES,
+    payload: obj
+  }
+}
+
+
+
+
+export function updateTokenObj(token) {
+  console.log("REDUCER TOKEN", token)
+  return {
+    type: UPDATE_TOKEN_OBJ,
+    payload: token
+  }
+}
+
+
+export function updateUserOccupation(res) {
+  console.log("REDUCER RES", res)
+  return {
+    type: UPDATE_USER_OCCUPATION,
+    payload: res
+  }
+}
+
 
 
 export function addToCart(item) {
@@ -37,21 +90,21 @@ export function clearReduxCart() {
 }
 
 
-export function updateItem1Quantity(value) {  
+export function updateItem1Quantity(value) {
   return {
     type: UPDATE_ITEM1_QUANTITY,
     payload: value
   }
 }
 
-export function updateItem2Quantity(value) {  
+export function updateItem2Quantity(value) {
   return {
     type: UPDATE_ITEM2_QUANTITY,
     payload: value
   }
 }
 
-export function updateItem3Quantity(value) {  
+export function updateItem3Quantity(value) {
   return {
     type: UPDATE_ITEM3_QUANTITY,
     payload: value
@@ -114,6 +167,16 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, { displayItem3: action.payload })
     case HIDE_WARNING:
       return Object.assign({}, state, { showWarning: action.payload })
+    case UPDATE_ORDER_OBJ:
+      return Object.assign({}, state, { orderObj: action.payload })
+    case UPDATE_ORDER_RES:
+      return Object.assign({}, state, { orderRes: action.payload })
+
+    case UPDATE_TOKEN_OBJ:
+      return Object.assign({}, state, { tokenObj: action.payload })
+
+    case UPDATE_USER_OCCUPATION:
+      return Object.assign({}, state, { userOccupation: action.payload })
 
     default: return state;
   }

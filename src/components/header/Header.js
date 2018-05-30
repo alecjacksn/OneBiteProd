@@ -3,12 +3,13 @@ import { Row, Col } from 'antd';
 import { Link } from 'react-router-dom'
 // import { Icon } from 'antd'
 import { connect } from 'react-redux'
-import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart } from '../../ducks/reducer'
+import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateTokenObj, updateOrderRes } from '../../ducks/reducer'
 import OneBiteLogo from '../../images/OneBite Logo 1500 px 600 dpi.png'
 import Burger from '../burger/Burger'
+import axios from 'axios'
 
 class Header extends Component {
-  constructor(){
+  constructor() {
     super()
 
     this.state = {
@@ -18,10 +19,21 @@ class Header extends Component {
   }
 
 
-  // componentDidMount(){
-  //   var cart = localStorage.getItem('cart').split(',')
-  //   this.props.addToCart(cart)
-  // }
+  componentDidMount() {
+    if (localStorage.getItem('tokenId')) {
+      var tokenId = localStorage.getItem('tokenId')
+      axios.post('/api/get-token', { token: tokenId }).then(res => {
+        this.props.updateTokenObj(res.data.success)
+      })
+    }
+    if (localStorage.getItem('orderId')) {
+      var orderId = localStorage.getItem('orderId')
+      axios.post('/api/get-order', { token: orderId }).then(res => {        
+        this.props.updateOrderRes(res.data.success)
+      })
+      
+    } 
+  }
 
   componentWillMount() {
     var item1 = 0;
@@ -30,7 +42,7 @@ class Header extends Component {
     var cart = localStorage.getItem('cart') ? localStorage.getItem('cart').split(',') : null
     cart ?
       cart.reduce(function (n, person) {
-        if (person === '1') {          
+        if (person === '1') {
           ++item1
         }
         if (person === '2') {
@@ -76,7 +88,7 @@ class Header extends Component {
               <Link to="/cart">
                 Cart{this.props.cart ? <span id="header-cart-id">({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
             </div>
-                <Burger tabOpen={this.state.tabOpen} />
+            <Burger tabOpen={this.state.tabOpen} />
           </div>
         </div>
       </div>
@@ -119,4 +131,4 @@ function mapStateToProps(state) {
   return state
 }
 
-export default connect(mapStateToProps, { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart })(Header)
+export default connect(mapStateToProps, { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateTokenObj, updateOrderRes })(Header)

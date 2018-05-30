@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import productsTest from './productsList'
+import productsList from './productsList'
 import {connect} from 'react-redux'
 import {addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart} from '../../../ducks/reducer'
 import { message } from 'antd';
@@ -41,7 +41,7 @@ class DisplayedProducts extends Component {
 
     productsFunction() {
         var newArray = []
-        return productsTest.map((e, i) => {
+        return productsList.map((e, i) => {
             return (
                 <div key={i} className="single-product-container">
                     <img className="single-product-img" alt="The Product" src={e.image} />
@@ -53,8 +53,7 @@ class DisplayedProducts extends Component {
                         <span>{e.displayPrice}</span>
                         <br />
                         <br />
-                        <button onClick={() => this.addToCart(e.id)} className="add-to-cart-button">Add To Cart</button>
-                        {/* <button onClick={() => localStorage.clear()} className="add-to-cart-button">CLEAR STOREAGE</button> */}
+                        <button onClick={() => this.addToCart(e.id)} className="add-to-cart-button">Add To Cart</button>                    
                     </div>
                 </div>
             )

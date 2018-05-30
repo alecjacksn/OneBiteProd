@@ -1,17 +1,17 @@
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const CORS_WHITELIST = require('./const/frontend');
 
-const corsOptions = {
-  origin: (origin, callback) =>
-    (CORS_WHITELIST.indexOf(origin) !== -1)
-      ? callback(null, true)
-      : callback(new Error('Not allowed by CORS'))
-};
+// const corsOptions = {
+//   origin: (origin, callback) =>
+//     (CORS_WHITELIST.indexOf(origin) !== -1)
+//       ? callback(null, true)
+//       : callback(new Error('Not allowed by CORS'))
+// };
 
 const configureServer = app => {
-  app.use(cors());
+  // app.use(cors());
 
   app.use(bodyParser.json());
 };

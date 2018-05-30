@@ -1,6 +1,9 @@
 import React from 'react'
 import productsList from '../onebite/products/productsList'
 import _ from 'underscore-node'
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import { message } from 'antd';
 
 export function getProductsInCart(cart) {
   if (cart) {
@@ -84,7 +87,7 @@ export function displayProductsInCart(cartItems, removeFunction, removeFromRedux
                   <span>${(parseInt(e.price) * Number(eval(`item${e.id}`))).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span>
                 </div>
               </div>
-              <span onClick={() => removeFunction(i, removeFromReduxFunction, cartFromRedux, clearCart)} className="cart-remove-button">Remove</span>
+              <span onClick={() => submit(i, removeFromReduxFunction, cartFromRedux, clearCart)} className="cart-remove-button">Remove</span>
             </div>
           </div>
 
@@ -114,6 +117,29 @@ export function removeItemFromCart(index, removeFromRedux, redux, clearCart) {
 }
 
 
+function submit(index, removeFromRedux, redux, clearCart) {
+  confirmAlert({
+    title: 'Remove Item?',
+    // message: 'Are you sure to do this.',
+    buttons: [
+      {
+        label: 'Yes',
+        onClick: () => {
+          message.success(`Removed`);
+          return removeItemFromCart(index, removeFromRedux, redux, clearCart)
+        }
+      },
+      {
+        label: 'No',
+        onClick: () => {
+          console.log("NO WAS PRESSED")
+          return null
+        }
+      }
+    ]
+  })
+};
+
 
 export function CountNumberOfItemsInCart(cart, item1, item2, item3, saveCart, addToCart) {
   var numOfItems = 3
@@ -129,8 +155,8 @@ export function CountNumberOfItemsInCart(cart, item1, item2, item3, saveCart, ad
     var theItem = id === 1 ? item1 : id === 2 ? item2 : id === 3 ? item3 : null
     // gets the difference between the input and the number of that item in the cart
     difference = (theItem > map[id]) ? theItem - map[id] : map[id] - theItem
-    
-  
+
+
     if (!map[id] && theItem > 0) {
       for (var i = 0; i < theItem; i++) {
         newCartArray[0].push(id.toString())
@@ -157,6 +183,72 @@ export function CountNumberOfItemsInCart(cart, item1, item2, item3, saveCart, ad
 
 
 
+export function createOrdersObj(
+  item1,
+  item2,
+  item3,
+  item1SKU,
+  item2SKU,
+  item3SKU,
+  name,
+  line1,
+  city,
+  state,
+  country,
+  zip,
+  email,
+  updateOrderObj
+) {
+  var postCountry = country === "United States" ? "US" : country
+  var updatedObj = {}
+  var defaultObj = {
+    currency: 'usd',
+    items: [
+
+    ],
+    shipping: {
+      name: name,
+      address: {
+        line1: line1,
+        city: city,
+        state: state,
+        country: postCountry,
+        postal_code: zip
+      }
+    },
+    email: email
+  }
+  if (item1 > 0) {
+    defaultObj.items.push({
+
+      parent: item1SKU,
+      quantity: item1,
+      type: 'sku',
+
+    })
+  } if (item2 > 0) {
+    defaultObj.items.push({
+
+      parent: item2SKU,
+      quantity: item2,
+      type: 'sku',
+
+    })
+  } if (item3 > 0) {
+    defaultObj.items.push({
+
+      parent: item3SKU,
+      quantity: item3,
+      type: 'sku',
+
+    })
+  }
+
+  updateOrderObj(defaultObj)
+  return defaultObj
+
+
+}
 
 
 

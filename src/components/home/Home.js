@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import FAQ from '../onebite/FAQ/FAQ'
 import Video from '../onebite/Video'
 import Evolution from '../onebite/evolution/Evolution'
-
+import axios from 'axios'
 
 class Home extends Component {
   constructor() {
@@ -16,21 +16,22 @@ class Home extends Component {
     }
   }
 
-  // componentWillMount() {
-  //   axios.get('http://localhost:3232/api/test').then(res => {
 
-  //     this.setState({
-  //       test: res.data
-  //     })
+  // updateOrder(){
+  //   console.log("HIT")
+  //   axios.post('/api/update-order').then(res => {
+  //     console.log("UPDATED ORDER RES", res)
   //   })
   // }
 
-
   render() {
+    console.log("HOME ORDER ORB", this.props.orderObj)
+    console.log("HOME ORDER res", this.props.orderRes)
+    console.log("TOKEN OBJ", this.props.tokenObj)
     return (
       <div className="home-container">
         {/* <div className="home-top-section"> */}
-
+        {/* <button onClick={() => {this.updateOrder()}} style={{background: 'steelblue', width: '200px', height: '100px' }}>UPDATE ORDER</button> */}
 
 
         {/* <div className="home-img-div"> */}
@@ -70,7 +71,7 @@ class Home extends Component {
           <img align="middle" src={pastVsPresent} />
         </div> */}
         {/* <Movements /> */}
-        <Products />
+        <Products />        
         {/* <Evolution /> */}
       </div>
     );

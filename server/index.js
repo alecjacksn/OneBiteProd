@@ -9,7 +9,7 @@ const express = require('express')
   , bodyParser = require('body-parser')
   , cors = require('cors')
 
-var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
 
 const app = express();
 app.use(cors());
@@ -29,12 +29,90 @@ const postStripeCharge = res => (stripeErr, stripeRes) => {
 }
 
 
+const postStripeOrder = res => (stripeErr, stripeRes) => {
+  if (stripeErr) {
+    console.log("ERRROR", stripeErr)
+    res.status(500).send({ error: stripeErr });
+  } else {
+    res.status(200).send({ success: stripeRes });
+  }
+}
+
+
+
+const getStripeToken = res => (stripeErr, stripeRes) => {
+  if (stripeErr) {
+    console.log("ERRROR", stripeErr)
+    res.status(500).send({ error: stripeErr });
+  } else {
+    res.status(200).send({ success: stripeRes });
+  }
+}
+
+
+
+
+const getStripeOrder = res => (stripeErr, stripeRes) => {
+  if (stripeErr) {
+    console.log("ERRROR", stripeErr)
+    res.status(500).send({ error: stripeErr });
+  } else {
+    // console.log("STRIPE RES", stripeRes)    
+    res.status(200).send({ success: stripeRes });
+  }
+}
+
+
+
+
+
+
+
 const path = require('path')
-app.get('*', (req, res)=>{
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build/index.html'));
 })
 configureServer(app);
 // configureRoutes(app);
+
+
+app.post('/api/get-token', (req, res) => {
+  // console.log("REQ . BODY", req.body.token)
+  stripe.tokens.retrieve(
+    req.body.token,
+    getStripeToken(res)
+  );
+})
+
+
+app.post('/api/get-order', (req, res) => {
+  console.log("REQ", req.body.token)
+  console.log("AYYY")
+  stripe.orders.retrieve(
+    req.body.token,
+    getStripeToken(res)
+  );
+})
+
+
+
+
+
+
+
+
+app.post('/api/update-order-shipping', (req, res) => {
+  console.log("THIS WAS HIT")
+  var orderId = req.body.orderId
+  var shippingId = req.body.shippingId
+
+  stripe.orders.update(orderId, {
+    selected_shipping_method: shippingId
+  }, getStripeOrder(res))
+});
+
+
+
 
 
 app.post('/api/stripe', (req, res) => {
@@ -44,7 +122,7 @@ app.post('/api/stripe', (req, res) => {
     amount: req.body.amount,
     currency: req.body.currency,
     source: stripeToken,
-    description: req.body.description, 
+    description: req.body.description,
     receipt_email: stripeEmail
   }, postStripeCharge(res))
 });
@@ -55,6 +133,12 @@ app.listen(SERVER_CONFIGS.PORT, error => {
   console.log(`Server running on port ${SERVER_CONFIGS.PORT}`);
 });
 
+
+
+app.post('/api/create-order', (req, res) => {
+  // console.log("REQ.body", req.body)
+  stripe.orders.create(req.body, postStripeOrder(res))
+})
 
 
 // const app = express();
