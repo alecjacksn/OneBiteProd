@@ -10,7 +10,7 @@ const express = require('express')
   , cors = require('cors')
   , helmet = require('helmet')
 
-var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 
 const app = express();
 app.use(helmet())
