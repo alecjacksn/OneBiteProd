@@ -28,9 +28,6 @@ class Home extends Component {
   // }
 
   render() {
-    console.log("HOME ORDER ORB", this.props.orderObj)
-    console.log("HOME ORDER res", this.props.orderRes)
-    console.log("TOKEN OBJ", this.props.tokenObj)
     return (
       <div className="home-container">
         {/* <div className="home-top-section"> */}
