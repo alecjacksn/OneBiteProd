@@ -690,9 +690,18 @@ html, body {
 /*                OVERVIEW.js    CARRTTTTTT       ***********************************/
 
 
+.model-cart-waiting .ant-modal-content{
+  background: rgba(0,0,0, .0) !important;
+  box-shadow: none;
+}
 
+.model-cart-waiting .ant-modal-close-x{
+  display: none;
+}
 
-
+.ant-modal-footer{
+  display: none;
+}
 
 .overview-container{
   background: white;
@@ -1067,7 +1076,7 @@ html, body {
   border: 1px solid rgba(0,0,0, .1);
   box-shadow:1px 1px 2px 1px rgba(0,0,0,.3);
   border-radius: 2px;  
-  margin-bottom: 20px;
+  margin-bottom: 70px;
   /* display: flex; */
   
 }
@@ -1109,12 +1118,13 @@ html, body {
 
 .checkout-review-info-container{
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: flex-end;
   flex-direction: column;
   width: 50%;
   border-right: 1px solid rgba(0,0,0, .1);
   padding-right: 5%;
+  
 }
 
 
@@ -1128,6 +1138,30 @@ html, body {
 
 
 
+
+.checkout-pay-button{
+  height: 40px;
+  width: 150px;
+  margin-top: 25px;
+  /* background: steelblue; */
+  font-size: 20px;
+  color: white;
+}
+
+
+
+
+
+
+
+.ant-d-spinner {
+  text-align: center;
+  /* background: rgba(0,0,0,0.05); */
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 30px 50px;
+  margin: 20px 0;
+}
 
 
 
@@ -1458,17 +1492,17 @@ html, body {
 }
 
 
-.ant-modal-content{
+/* .ant-modal-content{
   height: 70vh !important; 
   width: 80vw !important;
   
-}
+} */
 
-
+/* 
 .ant-modal-body{
   height: 55vh !important; 
   width: 80vw !important;
-}
+} */
 
 
 .popup-main-div{

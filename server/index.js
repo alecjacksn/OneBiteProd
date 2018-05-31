@@ -8,10 +8,12 @@ const express = require('express')
   , configureRoutes = require('./routes')
   , bodyParser = require('body-parser')
   , cors = require('cors')
+  , helmet = require('helmet')
 
 var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
 
 const app = express();
+app.use(helmet())
 app.use(cors());
 
 app.use(express.static(`${__dirname}/../build`));
@@ -98,9 +100,6 @@ app.post('/api/get-order', (req, res) => {
 
 
 
-
-
-
 app.post('/api/update-order-shipping', (req, res) => {
   console.log("THIS WAS HIT")
   var orderId = req.body.orderId
@@ -110,6 +109,14 @@ app.post('/api/update-order-shipping', (req, res) => {
     selected_shipping_method: shippingId
   }, getStripeOrder(res))
 });
+
+
+
+app.post('/api/pay-for-order', (req, res) => {    
+  stripe.orders.pay(req.body.orderId, {
+    source: req.body.tokenId // obtained with Stripe.js
+  },  getStripeOrder(res)) 
+})
 
 
 

@@ -24,6 +24,11 @@ export function fireTracking(nextState) {
 
 }
 
+
+export function alert(){
+    return alert("YOU LEFT THE PAGE")
+}
+
 export default (
     <Switch>
         {/* EMPLOYEE ROUTES */}
@@ -40,7 +45,7 @@ export default (
         {/* <Route path='/laboratory' onEnter={ fireTracking } component={Laboratory} /> */}
         {/* <Route path='/philosophy' onEnter={ fireTracking } component={Philosophy} /> */}
         <Route path='/philosophy' onEnter={fireTracking} component={Philosophy} />
-        <Route path='/cart-checkout' onEnter={fireTracking} component={CartCheckout} />
+        <Route path='/cart-checkout' onEnter={fireTracking} onLeave={() => this.alert()} component={CartCheckout} />
         {/* <Route render={() => {
             return (<div>I'm sorry, the page you're looking for cannot be found. A highly trained monkey is working to build the page as you read this.
         </div>)

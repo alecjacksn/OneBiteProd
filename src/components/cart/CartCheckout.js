@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateOrderRes } from '../../ducks/reducer'
+import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateOrderRes, clearRedux, clearReduxCart, tokenFalse } from '../../ducks/reducer'
 import { SubTotalCalculator, getProductsInCart } from '../Utils/Utilities'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import products from '../onebite/products/productsList'
 import mapIcon from '../../images/map-marker.png'
-import { Button, Icon, Spin } from 'antd';
+import { Button, Icon, Spin, Modal } from 'antd';
 import moment from 'moment'
 import axios from 'axios'
 import numeral from 'numeral'
@@ -20,22 +20,42 @@ class CartCheckout extends Component {
       activeShippingChoice: '',
       orderRes: {},
       finishedLoading: false,
+      redirectHome: false,
+      loading: false,
+      tokenObj: {},
+      tokenFinished: false
     }
+    this.redirectHomeFunction = this.redirectHomeFunction.bind(this)
   }
 
+
+  componentDidMount() {
+    console.log("THIS HIT")
+    this.setState({
+      tokenObj: this.props.tokenObj
+    })
+  }
 
 
   componentWillMount() {
     var orderId = localStorage.getItem('orderId')
+    var tokenId = localStorage.getItem('tokenId')
     axios.post('/api/get-order', { token: orderId }).then(res => {
-      this.props.updateOrderRes(res.data.success)
-      console.log("THIS IS A CONOLOS", this.props.orderRes)
+      console.log("HIT THIS FIRSY THEN")
+      this.props.updateOrderRes(res.data.success)      
       this.setState({
         activeShippingChoice: res.data.success.selected_shipping_method,
         orderRes: res.data.success,
         finishedLoading: true,
         tokenObj: this.props.tokenObj,
         tokenCard: this.props.tokenObj.card
+      })
+      axios.post('/api/get-token', { token: tokenId }).then(res => {
+        console.log("RESPONSE FROM AXIOS HEADER", res.data.success)
+          this.setState({
+            tokenFinished: true,
+            tokenObj: res.data.success
+          })
       })
     })
   }
@@ -92,6 +112,7 @@ class CartCheckout extends Component {
     axios.post('/api/update-order-shipping', { orderId: orderId, shippingId: id })
       .then(res => {
         console.log("UPDATED ORDER RES", res)
+        this.props.updateOrderRes(res.data.success)
         this.setState({
           activeShippingChoice: id,
           orderRes: res.data.success
@@ -116,14 +137,14 @@ class CartCheckout extends Component {
             </div>
             <div className="checkout-shipping-info-div">
               <span>Delivery:</span>
-              <span>{moment(e.delivery_estimate ? e.delivery_estimate.date: "N/A").format('DD MMMM YYYY')}</span>
+              <span>{moment(e.delivery_estimate ? e.delivery_estimate.date : "N/A").format('DD MMMM YYYY')}</span>
             </div>
           </Button>
         </div>
       )
       displayArr.push(x)
     })
-    console.log("OPTIONS", options)
+    // console.log("OPTIONS", options)
     return displayArr
   }
 
@@ -148,6 +169,63 @@ class CartCheckout extends Component {
     })
   }
 
+  redirectHomeFunction() {
+    this.setState({
+      redirectHome: true
+    })
+    return this.props.tokenFalse()
+  }
+
+  successPayment() {    
+    localStorage.clear()
+    this.props.clearReduxCart()
+    this.props.clearRedux()
+    this.success()
+    // return this.redirectHomeFunction(true)
+  };
+
+   success() {
+    Modal.success({
+      title: 'Your order has been placed!',      
+    });
+    return this.redirectHomeFunction(true)
+  }
+
+  errorPayment(data) {
+    console.log("IT WAS AN ERROR HERE", data)
+    alert(`There was an issue with your order. Please contact ${(<a href="mailto:support@onebite.com">support@onebite.com</a>)}. We Apologize for the inconvenience :(`, );
+    localStorage.clear()
+    this.props.clearReduxCart()
+    return this.redirectHomeFunction(true)
+  };
+
+
+
+  checkoutAndPay() {
+    var orderId = this.state.orderRes.id
+    var tokenId = this.state.tokenObj.id
+    this.setState({
+      loading: true
+    })
+    axios.post('/api/pay-for-order', {
+      orderId: orderId,
+      tokenId: tokenId
+    }).then(response => {
+      console.log("RESPONSE", response)
+      this.setState({
+        loading: false
+      })
+      return this.successPayment()
+    }).catch(err => {
+      console.log("ERROR", err)
+      // return this.errorPayment()
+      return this.errorPayment()
+    });
+  }
+
+
+
+
   render() {
     // console.log('order res', this.props.orderRes)
     var shippingOptions = this.state.orderRes.shipping_methods;
@@ -156,19 +234,22 @@ class CartCheckout extends Component {
     var orderId = this.props.orderRes.id
 
     var shippingAdd = this.state.orderRes.shipping
-    
-    
-console.log("SHIPPING ADD", shippingAdd)
+    var userInfo = this.state.tokenObj
 
-    if (this.props.orderRes.id === false) {
+
+    if (this.props.updatedTokenObj === false) {
       return <Redirect push to='/cart' />;
+    }
+
+    if (this.state.redirectHome) {
+      return <Redirect push to='/' />;
     }
 
     return (
       <div className="checkout-home-container">
         <div className="checkout-home-top-div">
           <div className="checkout-top-header">
-            <span>Checkout</span>            
+            <span>Checkout</span>
           </div>
           <div className="checkout-items-container">
             <div className="checkout-items-div">
@@ -188,30 +269,30 @@ console.log("SHIPPING ADD", shippingAdd)
                 </div>
                 :
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Spin size="large" />
+                  <Spin size="large" className="ant-d-spinner" />
                 </div>
             }
           </div>
           <div className="checkout-shipping-review-container">
             {
-              this.state.finishedLoading ?
+              this.state.tokenFinished ?
                 <div className="testtesttest">
                   <div className="checkout-review-info-container">
                     <div className="checkout-review-spans">
-                      <span>Name:</span>
-                      <span>{this.state.tokenCard ? this.state.tokenCard.name : null}</span>
+                      <span>Name</span>
+                      <span>{this.state.tokenFinished ? userInfo.card.name : null}</span>
                     </div>
                     <div className="checkout-review-spans">
-                      <span>Email:</span>
-                      <span>{this.state.finishedLoading ? this.state.tokenObj.email : null}</span>
+                      <span>Email</span>
+                      <span>{this.state.tokenFinished ? userInfo.email : null}</span>
                     </div>
                     <div className="checkout-review-spans">
-                      <span>Card:</span>
-                      <span>{this.state.tokenCard ? `****${this.state.tokenCard.last4}` : null}</span>
+                      <span>Card</span>
+                      <span>{this.state.tokenFinished ? `******${userInfo.card.last4}` : null}</span>
                     </div>
                     <div className="checkout-review-spans">
-                      <span>Address:</span>
-                      <span id="checkout-info-address-span">{this.state.finishedLoading ? `${shippingAdd ? shippingAdd.address.line1 + " " + shippingAdd.address.city + " " + shippingAdd.address.state + " " + shippingAdd.address.postal_code + " " + shippingAdd.address.country  : "N/A"}` : null}</span>
+                      <span>Address</span>
+                      <span id="checkout-info-address-span">{this.state.finishedLoading ? `${shippingAdd ? shippingAdd.address.line1 + " " + shippingAdd.address.city + " " + shippingAdd.address.state + " " + shippingAdd.address.postal_code + " " + shippingAdd.address.country : "N/A"}` : null}</span>
                     </div>
                   </div>
                   <div className="checkout-review-div">
@@ -224,12 +305,15 @@ console.log("SHIPPING ADD", shippingAdd)
                       <span>{this.state.finishedLoading ? this.getShippingCost(shippingOptions, activeShippingChoice) : null}</span>
                     </div>
                     <div className="checkout-review-spans">
-                      <span>Tax:</span>
+                      <span>Tax</span>
                       <span>{this.state.finishedLoading ? this.getTaxCost(this.state.orderRes) : null}</span>
                     </div>
                     <div className="checkout-review-spans checked-total">
-                      <span>Total:</span>
+                      <span>Total</span>
                       <span>{this.state.finishedLoading ? `$${this.moneyFormat(this.state.orderRes.amount)}` : null}</span>
+                    </div>
+                    <div>
+                      <Button loading={this.state.loading} onClick={() => this.checkoutAndPay()} type="primary" className="checkout-pay-button">Pay</Button>
                     </div>
                   </div>
 
@@ -237,7 +321,7 @@ console.log("SHIPPING ADD", shippingAdd)
 
                 :
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                  <Spin size="large" />
+                  <Spin size="large" className="ant-d-spinner" />
                 </div>
             }
           </div>
@@ -253,4 +337,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps, { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateOrderRes })(CartCheckout)
+export default connect(mapStateToProps, { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateOrderRes, clearRedux, clearReduxCart, tokenFalse })(CartCheckout)

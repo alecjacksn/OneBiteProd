@@ -3,7 +3,11 @@ import productsList from '../onebite/products/productsList'
 import _ from 'underscore-node'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import { message } from 'antd';
+import { message, Modal, Button } from 'antd';
+const confirm = Modal.confirm;
+
+
+
 
 export function getProductsInCart(cart) {
   if (cart) {
@@ -87,7 +91,7 @@ export function displayProductsInCart(cartItems, removeFunction, removeFromRedux
                   <span>${(parseInt(e.price) * Number(eval(`item${e.id}`))).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span>
                 </div>
               </div>
-              <span onClick={() => submit(i, removeFromReduxFunction, cartFromRedux, clearCart)} className="cart-remove-button">Remove</span>
+              <span onClick={() => showConfirm(i, removeFromReduxFunction, cartFromRedux, clearCart)} className="cart-remove-button">Remove</span>
             </div>
           </div>
 
@@ -139,6 +143,26 @@ function submit(index, removeFromRedux, redux, clearCart) {
     ]
   })
 };
+
+function showConfirm(index, removeFromRedux, redux, clearCart) {
+  confirm({
+    title: 'Do you Want to delete these items?',
+    // content: 'Some descriptions',
+    onOk() {
+      console.log('OK');
+      message.success(`Removed`);
+      return removeItemFromCart(index, removeFromRedux, redux, clearCart)
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+}
+
+
+
+
+
 
 
 export function CountNumberOfItemsInCart(cart, item1, item2, item3, saveCart, addToCart) {

@@ -13,7 +13,8 @@ const initialState = {
   orderRes: {},
   tokenObj: {},
   orderObjCreated: false,
-  userOccupation: ""
+  userOccupation: "",
+  updatedTokenObj: ""
 }
 
 const UPDATE_CART = 'UPDATE_CART';
@@ -29,7 +30,15 @@ const UPDATE_ORDER_OBJ = 'UPDATE_ORDER_OBJ'
 const UPDATE_ORDER_RES = 'UPDATE_ORDER_RES'
 const UPDATE_TOKEN_OBJ = 'UPDATE_TOKEN_OBJ'
 const UPDATE_USER_OCCUPATION = 'UPDATE_USER_OCCUPATION'
+const CLEAR_REDUX_SUCCESS = 'CLEAR_REDUX_SUCCESS'
+const TOKEN_FALSE = 'TOKEN_FALSE'
 
+
+export function tokenFalse(){
+  return {
+    type: TOKEN_FALSE,    
+  }
+}
 
 
 export function updateOrderObj(obj) {
@@ -59,6 +68,14 @@ export function updateTokenObj(token) {
   return {
     type: UPDATE_TOKEN_OBJ,
     payload: token
+  }
+}
+
+
+export function clearRedux() {
+  return {
+    type: CLEAR_REDUX_SUCCESS,
+
   }
 }
 
@@ -173,10 +190,18 @@ export default function reducer(state = initialState, action) {
       return Object.assign({}, state, { orderRes: action.payload })
 
     case UPDATE_TOKEN_OBJ:
-      return Object.assign({}, state, { tokenObj: action.payload })
+      return Object.assign({}, state, { tokenObj: action.payload, updatedTokenObj: true })
+  
 
     case UPDATE_USER_OCCUPATION:
       return Object.assign({}, state, { userOccupation: action.payload })
+
+    case CLEAR_REDUX_SUCCESS:
+      return Object.assign({}, state, { userOccupation: '', orderObj: {}, orderRes: {}, tokenObj: {}})
+
+      case TOKEN_FALSE:
+      return Object.assign({}, state, { updatedTokenObj: false })
+
 
     default: return state;
   }

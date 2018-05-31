@@ -10,7 +10,7 @@ import productsList from '../onebite/products/productsList'
 import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUB_KEY from '../../constants/stripePubKey'
 
-import { Tooltip, Button, Select, Icon } from 'antd';
+import { Tooltip, Button, Select, Icon, Modal, Spin } from 'antd';
 
 import axios from 'axios'
 
@@ -30,7 +30,9 @@ class Cart extends Component {
     this.state = {
       redirectHome: false,
       buttonDisabled: true,
-      Occupation: ''
+      Occupation: '',
+      redirectToCheckout: false,
+      visible: false
     }
     this.onToken = this.onToken.bind(this)
     this.redirectHomeFunction = this.redirectHomeFunction.bind(this)
@@ -155,7 +157,11 @@ class Cart extends Component {
   }
 
 
-
+  showModal(inp) {
+    return this.setState({
+      visible: inp
+    })
+  }
 
 
 
@@ -172,9 +178,8 @@ class Cart extends Component {
     var state = shippingAddress.billing_address_state
     var country = shippingAddress.billing_address_country
     var zip = shippingAddress.billing_address_zip
-    // this.props.updateTokenObj(token)
-    console.log("TOKENNNNN", token)
-    console.log("shippingAddress", shippingAddress)
+    this.props.updateTokenObj(token)
+    this.showModal(true)
 
     var returnedOrderObj = createOrdersObj(
       item1,
@@ -195,13 +200,12 @@ class Cart extends Component {
 
     axios.post('/api/create-order', returnedOrderObj)
       .then(response => {
-        console.log("RESPONSE DATA ID", response.data.success.id)
         this.props.updateUserOccupation(true)
         this.props.updateOrderRes(response.data.success)
         localStorage.setItem("orderId", response.data.success.id)
         localStorage.setItem("tokenId", token.id)
-        console.log("RESPONSE", response)
-        return <Redirect push to='/cart-checkout' />
+        this.showModal(false)
+        return this.redirectFuntion()
       }).catch(err => {
         console.log("ERROR", err)
         // return this.errorPayment()
@@ -260,6 +264,11 @@ class Cart extends Component {
   //   }).then((res) => console.log("RES", res)).catch((error) => { console.log("ERRORRRR", error); });
   // }
 
+  redirectFuntion() {
+    this.setState({
+      redirectToCheckout: true
+    })
+  }
 
 
   onClickPay() {
@@ -281,6 +290,10 @@ class Cart extends Component {
 
     if (this.state.redirectHome) {
       return <Redirect push to='/' />;
+    }
+
+    if (this.state.redirectToCheckout) {
+      return <Redirect push to='/cart-checkout' />;
     }
 
     return (
@@ -319,8 +332,15 @@ class Cart extends Component {
             label={"Proceed to Checkout"}
           />
         </div>
-        <div style={{padding: '30px 10px'}}>
-            <span style={{paddingRight: '5px'}}>Shipping</span>
+        <Modal
+          className="model-cart-waiting"          
+          visible={this.state.visible}
+          style={{background: 'none'}}
+        >
+          <Spin size="large" className="ant-d-spinner" />
+        </Modal>
+        <div style={{ padding: '30px 10px' }}>
+          <span style={{ paddingRight: '5px' }}>Shipping</span>
           <Tooltip placement="right" title={"Shipping information and options are provided in the next section."}>
             <Icon type="question-circle-o" />
           </Tooltip>
