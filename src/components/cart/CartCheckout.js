@@ -29,8 +29,7 @@ class CartCheckout extends Component {
   }
 
 
-  componentDidMount() {
-    console.log("THIS HIT")
+  componentDidMount() {    
     this.setState({
       tokenObj: this.props.tokenObj
     })
@@ -40,8 +39,7 @@ class CartCheckout extends Component {
   componentWillMount() {
     var orderId = localStorage.getItem('orderId')
     var tokenId = localStorage.getItem('tokenId')
-    axios.post('/api/get-order', { token: orderId }).then(res => {
-      console.log("HIT THIS FIRSY THEN")
+    axios.post('/api/get-order', { token: orderId }).then(res => {      
       this.props.updateOrderRes(res.data.success)      
       this.setState({
         activeShippingChoice: res.data.success.selected_shipping_method,
@@ -50,8 +48,7 @@ class CartCheckout extends Component {
         tokenObj: this.props.tokenObj,
         tokenCard: this.props.tokenObj.card
       })
-      axios.post('/api/get-token', { token: tokenId }).then(res => {
-        console.log("RESPONSE FROM AXIOS HEADER", res.data.success)
+      axios.post('/api/get-token', { token: tokenId }).then(res => {        
           this.setState({
             tokenFinished: true,
             tokenObj: res.data.success
@@ -110,8 +107,7 @@ class CartCheckout extends Component {
 
   updateShipping(id, orderId) {
     axios.post('/api/update-order-shipping', { orderId: orderId, shippingId: id })
-      .then(res => {
-        console.log("UPDATED ORDER RES", res)
+      .then(res => {        
         this.props.updateOrderRes(res.data.success)
         this.setState({
           activeShippingChoice: id,
@@ -191,9 +187,8 @@ class CartCheckout extends Component {
     return this.redirectHomeFunction(true)
   }
 
-  errorPayment(data) {
-    console.log("IT WAS AN ERROR HERE", data)
-    alert(`There was an issue with your order. Please contact ${(<a href="mailto:support@onebite.com">support@onebite.com</a>)}. We Apologize for the inconvenience :(`, );
+  errorPayment(data) {    
+    alert(`There was an issue with your order. Please contact support@onebite.com. We Apologize for the inconvenience :(`, );
     localStorage.clear()
     this.props.clearReduxCart()
     return this.redirectHomeFunction(true)
@@ -210,8 +205,7 @@ class CartCheckout extends Component {
     axios.post('/api/pay-for-order', {
       orderId: orderId,
       tokenId: tokenId
-    }).then(response => {
-      console.log("RESPONSE", response)
+    }).then(response => {      
       this.setState({
         loading: false
       })

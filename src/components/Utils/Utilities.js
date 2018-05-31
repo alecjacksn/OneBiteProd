@@ -135,8 +135,7 @@ function submit(index, removeFromRedux, redux, clearCart) {
       },
       {
         label: 'No',
-        onClick: () => {
-          console.log("NO WAS PRESSED")
+        onClick: () => {          
           return null
         }
       }
@@ -148,13 +147,11 @@ function showConfirm(index, removeFromRedux, redux, clearCart) {
   confirm({
     title: 'Do you Want to delete these items?',
     // content: 'Some descriptions',
-    onOk() {
-      console.log('OK');
+    onOk() {      
       message.success(`Removed`);
       return removeItemFromCart(index, removeFromRedux, redux, clearCart)
     },
-    onCancel() {
-      console.log('Cancel');
+    onCancel() {      
     },
   });
 }
@@ -201,8 +198,7 @@ export function CountNumberOfItemsInCart(cart, item1, item2, item3, saveCart, ad
       }
       return saveCart(newCartArray[0], addToCart)
     }
-  }
-  console.log("NEW CART ARRAY", newCartArray[0])
+  }  
 }
 
 

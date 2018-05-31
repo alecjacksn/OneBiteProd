@@ -98,8 +98,7 @@ class Cart extends Component {
 
   }
 
-  onToken = (token) => {
-    console.log("TOKENNNN", token)
+  onToken = (token) => {    
     axios.post('/api/stripe',
       {
         stripeToken: token.id,
@@ -148,8 +147,7 @@ class Cart extends Component {
         token1: token,
         shippingAddress: shippingAddress
 
-      }).then(response => {
-        console.log("RESPONSE", response)
+      }).then(response => {        
       }).catch(err => {
         console.log("ERROR", err)
         // return this.errorPayment()
@@ -276,8 +274,7 @@ class Cart extends Component {
   }
 
 
-  handleChange(value) {
-    console.log(`selected ${value}`);
+  handleChange(value) {    
     this.setState({
       Occupation: value,
       buttonDisabled: false
