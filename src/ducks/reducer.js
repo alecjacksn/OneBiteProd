@@ -63,8 +63,7 @@ export function updateOrderRes(obj) {
 
 
 
-export function updateTokenObj(token) {
-  console.log("REDUCER TOKEN", token)
+export function updateTokenObj(token) {  
   return {
     type: UPDATE_TOKEN_OBJ,
     payload: token
