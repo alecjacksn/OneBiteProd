@@ -101,6 +101,10 @@ class CartCheckout extends Component {
     var re = /\b(\d+)(\d{2})\b/;
     var subst = '$1.$2';
     var str = num.toString();
+    if(str.length <= 2){
+      console.log("222222222", num)
+      return `0.${num}`
+    }
     var result = str.replace(re, subst);
     return result
   }
@@ -157,9 +161,12 @@ class CartCheckout extends Component {
   }
 
   getTaxCost(obj) {
+    console.log("TAXXXX", obj)
     var items = obj.items
     return items.map((e, i) => {
+      console.log("EEEEE", e)
       if (e.description === "Sales tax") {
+        console.log("TRUUUUUU", e)
         return `$${this.moneyFormat(e.amount)}`
       }
     })
