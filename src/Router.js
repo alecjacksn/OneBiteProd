@@ -34,7 +34,7 @@ export default (
         {/* EMPLOYEE ROUTES */}
         <Route exact path='/' onEnter={fireTracking} component={Home} />
         <Route path='/cart' onEnter={fireTracking} component={Cart} />
-        <Route path='/contact' onEnter={fireTracking} component={Contact} />
+        {/* <Route path='/contact' onEnter={fireTracking} component={Contact} /> */}
         {/* <Route path='/events' onEnter={ fireTracking } component={Events} /> */}
         <Route path='/onebite/products' onEnter={fireTracking} component={Products} />
         {/* <Route path='/onebite/system' onEnter={ fireTracking } component={System} /> */}

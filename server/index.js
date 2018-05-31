@@ -10,7 +10,7 @@ const express = require('express')
   , cors = require('cors')
   , helmet = require('helmet')
 
-var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 
 const app = express();
 app.use(helmet())
@@ -87,9 +87,7 @@ app.post('/api/get-token', (req, res) => {
 })
 
 
-app.post('/api/get-order', (req, res) => {
-  console.log("REQ", req.body.token)
-  console.log("AYYY")
+app.post('/api/get-order', (req, res) => {  
   stripe.orders.retrieve(
     req.body.token,
     getStripeToken(res)
@@ -100,8 +98,7 @@ app.post('/api/get-order', (req, res) => {
 
 
 
-app.post('/api/update-order-shipping', (req, res) => {
-  console.log("THIS WAS HIT")
+app.post('/api/update-order-shipping', (req, res) => {  
   var orderId = req.body.orderId
   var shippingId = req.body.shippingId
 

@@ -169,9 +169,9 @@ class Cart extends Component {
     var item1 = this.props.item1
     var item2 = this.props.item2
     var item3 = this.props.item3
-    var item1SKU = productsList[0].testSKU
-    var item2SKU = productsList[1].testSKU
-    var item3SKU = productsList[2].testSKU
+    var item1SKU = productsList[0].liveSKU
+    var item2SKU = productsList[1].liveSKU
+    var item3SKU = productsList[2].liveSKU
     var name = token.card.name
     var line1 = shippingAddress.billing_address_line1
     var city = shippingAddress.billing_address_city
