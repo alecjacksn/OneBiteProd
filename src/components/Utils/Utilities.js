@@ -3,7 +3,7 @@ import productsList from '../onebite/products/productsList'
 import _ from 'underscore-node'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
-import { message, Modal, Button } from 'antd';
+import { message, Modal } from 'antd';
 const confirm = Modal.confirm;
 
 

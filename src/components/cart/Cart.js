@@ -27,10 +27,6 @@ class Cart extends Component {
     }
   }
 
-  componentWillMount() {
-    var theCart11 = this.props.cart
-  }
-
   saveCart(arr) {    
     localStorage.setItem('cart', arr)
     return this.props.addToCart(arr)

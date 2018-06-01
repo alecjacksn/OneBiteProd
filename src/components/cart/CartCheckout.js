@@ -8,7 +8,6 @@ import mapIcon from '../../images/map-marker.png'
 import { Button, Icon, Spin, Modal } from 'antd';
 import moment from 'moment'
 import axios from 'axios'
-import numeral from 'numeral'
 
 
 
@@ -67,7 +66,7 @@ class CartCheckout extends Component {
         var div = (
           <div key={i} className="checkout-mapped-item-div">
             <div className="checkout-img-div">
-              <img src={products[i].image} className="checkout-mapped-img" />
+              <img alt="OneBite Product" src={products[i].image} className="checkout-mapped-img" />
             </div>
             <div className="checkout-mapped-info-container">
               <div className="checkout-mapped-info">
@@ -159,8 +158,7 @@ class CartCheckout extends Component {
     })
   }
 
-  getTaxCost(obj) {
-    console.log("TAXXXX", obj)
+  getTaxCost(obj) {    
     var items = obj.items
     return items.map((e, i) => {      
       if (e.description === "Sales tax") {        

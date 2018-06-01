@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Checkout from './stripe/StripeComp'
+// import Checkout from './stripe/StripeComp'
 import { connect } from 'react-redux'
 import { SubTotalCalculator, getProductsInCart, createOrdersObj } from '../Utils/Utilities'
 import { Redirect } from 'react-router-dom';
@@ -10,17 +10,17 @@ import productsList from '../onebite/products/productsList'
 import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUB_KEY from '../../constants/stripePubKey'
 
-import { Tooltip, Button, Select, Icon, Modal, Spin } from 'antd';
+import { Tooltip, Select, Icon, Modal, Spin } from 'antd';
 
 import axios from 'axios'
 
 
 const Option = Select.Option;
 const CURRENCY = 'USD';
-const generalDentistId = "90514104"
-const prosthodontistId = "90514404"
-const dentalTechnicianId = "90514504"
-const otherId = ""
+// const generalDentistId = "90514104"
+// const prosthodontistId = "90514404"
+// const dentalTechnicianId = "90514504"
+// const otherId = ""
 
 
 class Cart extends Component {

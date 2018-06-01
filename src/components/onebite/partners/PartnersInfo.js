@@ -1,5 +1,3 @@
-const americanFlag = './partnersImages/american-flag.png'
-
 
 // COUNTRY FLAGS
 
