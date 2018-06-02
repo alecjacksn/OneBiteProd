@@ -11,7 +11,7 @@ import ReactGA from 'react-ga';
 import ReactPixel from 'react-facebook-pixel';
 
 
-ReactGA.initialize(process.env.REACT_APP_GOOGLEA);
+ReactGA.initialize(process.env.REACT_APP_GOOGLE);
 ReactGA.pageview(window.location.pathname + window.location.search);
 ReactPixel.init(process.env.REACT_APP_FACEBOOKPIX, {}, { debug: true, autoConfig: false });
 ReactPixel.pageView();
