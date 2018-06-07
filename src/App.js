@@ -5,7 +5,7 @@ import './reset.css'
 import Router from './Router'
 import { Layout } from 'antd';
 import HeaderComp from './components/header/Header'
-import Burger from './components/burger/Burger'
+// import Burger from './components/burger/Burger'
 import TopWarningBar from './components/help/TopWarningBar'
 import ReactGA from 'react-ga';
 import ReactPixel from 'react-facebook-pixel';

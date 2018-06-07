@@ -5,17 +5,14 @@ import App from './App';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store'
-import HttpsRedirect from 'react-https-redirect';
 
 
 
 ReactDOM.render(
-    <Provider store={store} >
-        {/* <HttpsRedirect> */}
+    <Provider store={store} >        
             <HashRouter>
                 <App />
-            </HashRouter>
-        {/* </HttpsRedirect> */}
+            </HashRouter>        
     </Provider>
     , document.getElementById('root'));
 

@@ -40,8 +40,7 @@ export function getProductsInCart(cart) {
 }
 
 export function SubTotalCalculator(cartItems) {
-  if (cartItems) {
-    // console.log("NEW CART ARRAY", cartItems)
+  if (cartItems) {    
     if (cartItems.length > 1) {
       Array.prototype.sum = function (prop) {
         var total = 0
@@ -51,8 +50,7 @@ export function SubTotalCalculator(cartItems) {
         return total
       }
       return cartItems.sum("price")
-    }
-    // console.log("CART ITEMS FALLSE", cartItems[0].price.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))
+    }    
     return cartItems[0] ? cartItems[0].price : ''
   }
   return null
@@ -99,11 +97,6 @@ export function displayProductsInCart(cartItems, removeFunction, removeFromRedux
       )
       displayArray.push(contentDiv)
     })
-    // console.log("ORDREED CART", orderedCart)
-    // console.log("1111111", item1)
-    // console.log("2222222", item2)
-    // console.log("3333333", item3)
-    // console.log("PRODUCTS LITTTTTTTT", productsList)
     return displayArray
 
   } else {

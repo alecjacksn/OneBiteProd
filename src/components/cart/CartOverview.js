@@ -17,10 +17,10 @@ import axios from 'axios'
 
 const Option = Select.Option;
 const CURRENCY = 'USD';
-// const generalDentistId = "90514104"
-// const prosthodontistId = "90514404"
-// const dentalTechnicianId = "90514504"
-// const otherId = ""
+const generalDentistId = "6aSAY"
+const prosthodontistId = "6aSbe"
+const dentalTechnicianId = "6aSRi"
+const otherId = "6rLqp"
 
 
 class Cart extends Component {
@@ -30,7 +30,7 @@ class Cart extends Component {
     this.state = {
       redirectHome: false,
       buttonDisabled: true,
-      Occupation: '',
+      occupation: '',
       redirectToCheckout: false,
       visible: false
     }
@@ -71,8 +71,6 @@ class Cart extends Component {
 
 
 
-
-
   redirectHomeFunction() {
     this.setState({
       redirectHome: true
@@ -87,7 +85,6 @@ class Cart extends Component {
   };
 
   errorPayment(data) {
-    console.log("IT WAS AN ERROR HERE", data)
     alert('Payment Error', data);
     localStorage.clear()
     this.props.clearReduxCart()
@@ -98,7 +95,7 @@ class Cart extends Component {
 
   }
 
-  onToken = (token) => {    
+  onToken = (token) => {
     axios.post('/api/stripe',
       {
         stripeToken: token.id,
@@ -108,25 +105,7 @@ class Cart extends Component {
         stripeEmail: token.email
 
       }).then(response => {
-
-        // console.log("TOKEN.EMAIL", token.email)
-        // console.log("CARD NAME", token.card.name)
-        // console.log("RESPONSE FROM API/STRIPE", response)
-        // axios.post('https://api3.getresponse360.com/v3/contacts',
-        //   {
-        //     "name": token.card.name,
-        //     "email": token.email,
-        //     "campaign": {
-        //       "campaignId": this.state.Occupation
-        //     }, headers: {
-        //       "Content-Type": "application/json",      
-        //       "Access-Control-Allow-Origin": "https://onebite.com",        
-        //     }
-
-        //   }).then(res => {
-        // console.log("RESPONSE", response)
-        return this.successPayment()
-        // })
+        return this.successPayment()        
 
       }).catch(err => {
         console.log("ERROR", err)
@@ -147,7 +126,7 @@ class Cart extends Component {
         token1: token,
         shippingAddress: shippingAddress
 
-      }).then(response => {        
+      }).then(response => {
       }).catch(err => {
         console.log("ERROR", err)
         // return this.errorPayment()
@@ -198,6 +177,7 @@ class Cart extends Component {
 
     axios.post('/api/create-order', returnedOrderObj)
       .then(response => {
+        this.newUpdate(name, token.email, this.state.occupation)
         this.props.updateUserOccupation(true)
         this.props.updateOrderRes(response.data.success)
         localStorage.setItem("orderId", response.data.success.id)
@@ -205,62 +185,24 @@ class Cart extends Component {
         this.showModal(false)
         return this.redirectFuntion()
       }).catch(err => {
-        console.log("ERROR", err)
-        // return this.errorPayment()
+        console.log("ERROR", err)        
       });
   }
 
 
 
+  newUpdate(name, email, job) {  
+    axios.post('/api/add/contact', {
+      name: name,
+      email: email,
+      job: job
+    }).then(res => {
+      // console.log('RESSS', res)
+    }).catch(err => {
+      // console.log("ERROR", err)
+    })
+  }
 
-
-
-  // testGetResponse() {
-  //   axios.post('https://api3.getresponse360.com/v3/contacts',
-  //     {
-  //       "name": "Jan Kowalski",
-  //       "email": "testeremail@gmail.com",
-  //       "dayOfCycle": "10",
-  //       "campaign": {
-  //         "campaignId": "jf7e3jn"
-  //       },
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Origin": "*",
-  //         "Access-Control-Allow-Methods": 'HEAD, GET, POST, PUT, PATCH, DELETE',
-  //         "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-  //         "X-Auth-Token": "",
-  //         "X-Domain": "onebite.com"
-  //       }
-
-  //     }).then(res => {
-  //       console.log("RESPONSE", res)
-  //     })
-  // }
-
-  // testsomething() {
-  //   axios({
-  //     method: 'POST',
-  //     url: "https://api3.getresponse360.com/v3/contacts",
-  //     crossDomain: true,
-  //     data: {
-  //       "name": "Jan Kowalski",
-  //       "email": "testeremail@gmail.com",
-  //       "dayOfCycle": "10",
-  //       "campaign": {
-  //         "campaignId": "jf7e3jn"
-  //       }
-  //     },
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Access-Control-Allow-Origin": "*",
-  //       "Access-Control-Allow-Methods": 'HEAD, GET, POST, PUT, PATCH, DELETE',
-  //       "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
-  //       "X-Auth-Token": "",
-  //       "X-Domain": "onebite.com"
-  //     }
-  //   }).then((res) => console.log("RES", res)).catch((error) => { console.log("ERRORRRR", error); });
-  // }
 
   redirectFuntion() {
     this.setState({
@@ -269,14 +211,9 @@ class Cart extends Component {
   }
 
 
-  onClickPay() {
-    console.log("CLICKEDDDDDDDD")
-  }
-
-
-  handleChange(value) {    
+  updateUserJob(value) {
     this.setState({
-      Occupation: value,
+      occupation: value,
       buttonDisabled: false
     })
   }
@@ -304,14 +241,13 @@ class Cart extends Component {
               style={{ width: '100%', marginTop: '2px' }}
               placeholder="Select an Occupation"
               optionFilterProp="children"
-              onChange={(e) => this.props.updateUserOccupation(e)}
-
+              onChange={(e) => this.updateUserJob(e)}
               filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             >
-              <Option value="90514104">General Dentist</Option>
-              <Option value="90514404">Prosthodontist</Option>
-              <Option value="90514504">Dental Technician</Option>
-              <Option value="other">Other</Option>
+              <Option value="6aSAY">General Dentist</Option>
+              <Option value="6aSbe">Prosthodontist</Option>
+              <Option value="6aSRi">Dental Technician</Option>
+              <Option value="6rLqp">Other</Option>
             </Select>
           </div>
 
@@ -324,15 +260,15 @@ class Cart extends Component {
             zipCode={true}
             receipt_email
             name="OneBite"
-            disabled={false}
+            disabled={this.state.buttonDisabled}
             panelLabel="Review Order"
             label={"Proceed to Checkout"}
           />
         </div>
         <Modal
-          className="model-cart-waiting"          
+          className="model-cart-waiting"
           visible={this.state.visible}
-          style={{background: 'none'}}
+          style={{ background: 'none' }}
         >
           <Spin size="large" className="ant-d-spinner" />
         </Modal>

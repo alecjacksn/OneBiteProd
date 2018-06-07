@@ -9,16 +9,22 @@ const express = require('express')
   , bodyParser = require('body-parser')
   , cors = require('cors')
   , helmet = require('helmet')
+  , request = require('request')
 
 var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 
 const app = express();
-app.use(helmet())
 app.use(cors());
+app.use(helmet())
 
 app.use(express.static(`${__dirname}/../build`));
 app.use(bodyParser.json());
 
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 const postStripeCharge = res => (stripeErr, stripeRes) => {
   if (stripeErr) {
@@ -87,7 +93,7 @@ app.post('/api/get-token', (req, res) => {
 })
 
 
-app.post('/api/get-order', (req, res) => {  
+app.post('/api/get-order', (req, res) => {
   stripe.orders.retrieve(
     req.body.token,
     getStripeToken(res)
@@ -98,7 +104,7 @@ app.post('/api/get-order', (req, res) => {
 
 
 
-app.post('/api/update-order-shipping', (req, res) => {  
+app.post('/api/update-order-shipping', (req, res) => {
   var orderId = req.body.orderId
   var shippingId = req.body.shippingId
 
@@ -109,10 +115,10 @@ app.post('/api/update-order-shipping', (req, res) => {
 
 
 
-app.post('/api/pay-for-order', (req, res) => {    
+app.post('/api/pay-for-order', (req, res) => {
   stripe.orders.pay(req.body.orderId, {
     source: req.body.tokenId // obtained with Stripe.js
-  },  getStripeOrder(res)) 
+  }, getStripeOrder(res))
 })
 
 
@@ -145,47 +151,66 @@ app.post('/api/create-order', (req, res) => {
 })
 
 
-// const app = express();
-// app.use(bodyParser.json())
-// app.use(cors())
 
-// app.use(express.static(__dirname + '/../build'))
+var options = {
+  url: 'https://api.getresponse.com/v3/contacts',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Auth-Token': 'api-key d8923313fd9d175bfacc991531e34c21'
+  }
+};
 
+var userData = {
+  "name": "Joe Schmoe",
+  "email": "joeyschmoey@gmail.com",
+  "dayOfCycle": "10",
+  "campaign": {
+    "campaignId": "90514404"
+  },
+  "customFieldValues": [
+    {
+      "customFieldId": "n",
+      "value": [
+        "white"
+      ]
+    }
+  ],
+}
 
-
-
-// massive(process.env.CONNECTIONSTRING).then(db => {
-//   app.set('db', db);
-// })
-
-
-
-
-
-
-
-// app.get('/api/test', (req, res, next) => {
-//   console.log("HIT")
-//   req.app.get('db').getName.theName().then(prod => res.status(200).send(prod))
-// })
-
-// app.get('/', (req, res) => {
-//   res.send({ message: 'Hello Stripe checkout server!', timestamp: new Date().toISOString() })
-// });
-
-
-
-// app.post('/stripe', (req, res) => {
-//   console.log("req.body", req.body)
-//   stripe.charges.create(req.body, postStripeCharge(res));
-// });
-
-
+app.post('/api/add/contact', function (req, res, next) {
+  var name = req.body.name
+  var email = req.body.email
+  var job = req.body.job
+  console.log("NAME", name)
+  console.log("email", email)
+  console.log("job", job)
+  console.log("THIS WAS HIT")
 
 
+  request({
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': process.env.GETRESPONSEAPI
+    },
+    url: 'https://api.getresponse.com/v3/contacts',
+    body: JSON.stringify({
+      "name": name,
+      "email": email,
+      "campaign": {
+        "campaignId": job
+      }
+    }),
+    method: 'POST'
+  }, function optionalCallback(err, httpResponse, body) {
+    if (err) {
+      return console.error('upload failed:', err);
+    } else {
+      // console.log("HET IT WORKED", httpResponse)
+      console.log("BODY", body)
+    }
+  });
 
-// let PORT = 3232;
 
-// app.listen(PORT, () => {
-//   console.log(`Listening on port ${PORT} yoooooooo`)
-// })
+});
+
+
