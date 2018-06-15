@@ -21,10 +21,7 @@ class Home extends Component {
 
 
 
-  render() {
-    console.log("WINDOW WIDTH", window.innerWidth)
-    console.log("x position", window.pageXOffset)
-    console.log("y position", window.pageYOffset)
+  render() { 
     return (
       <div className="home-container">        
         <img src={actualCoverPhoto} alt="#" className="home-img" />

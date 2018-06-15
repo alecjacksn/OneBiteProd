@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Home from './components/home/Home'
 import Cart from './components/cart/Cart'
+import About from './components/about/About'
 import Contact from './components/contact/Contact'
 import Events from './components/events/Events'
 import System from './components/onebite/System'
@@ -34,6 +35,7 @@ export default (
         {/* EMPLOYEE ROUTES */}
         <Route exact path='/' onEnter={fireTracking} component={Home} />
         <Route path='/cart' onEnter={fireTracking} component={Cart} />
+        <Route path='/about' onEnter={fireTracking} component={About} />
         {/* <Route path='/contact' onEnter={fireTracking} component={Contact} /> */}
         {/* <Route path='/events' onEnter={ fireTracking } component={Events} /> */}
         <Route path='/onebite/products' onEnter={fireTracking} component={Products} />

@@ -10,7 +10,7 @@ class MenuTab extends Component {
       <Menu right isOpen={this.props.tabOpen}>
         <Link className="burger-basic-nav" to="/">Home</Link>
         <Link className="burger-basic-nav" to="/cart">Cart</Link>
-        {/* <Link className="burger-basic-nav" to="/contact">Contact</Link> */}
+        <Link className="burger-basic-nav" to="/about">About</Link>
         {/* <Link className="burger-basic-nav" to="/events">Events</Link> */}
         <span className="burger-oneBite">OneBite</span>
         <Link className="burger-link" id="about" to="/onebite/products">Products</Link>

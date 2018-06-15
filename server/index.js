@@ -11,7 +11,7 @@ const express = require('express')
   , helmet = require('helmet')
   , request = require('request')
 
-var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 
 const app = express();
 app.use(cors());
@@ -94,6 +94,7 @@ app.post('/api/get-token', (req, res) => {
 
 
 app.post('/api/get-order', (req, res) => {
+  // console.log("THIS WAS HIT", req.body)
   stripe.orders.retrieve(
     req.body.token,
     getStripeToken(res)
@@ -151,31 +152,6 @@ app.post('/api/create-order', (req, res) => {
 })
 
 
-
-var options = {
-  url: 'https://api.getresponse.com/v3/contacts',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-Auth-Token': 'api-key d8923313fd9d175bfacc991531e34c21'
-  }
-};
-
-var userData = {
-  "name": "Joe Schmoe",
-  "email": "joeyschmoey@gmail.com",
-  "dayOfCycle": "10",
-  "campaign": {
-    "campaignId": "90514404"
-  },
-  "customFieldValues": [
-    {
-      "customFieldId": "n",
-      "value": [
-        "white"
-      ]
-    }
-  ],
-}
 
 app.post('/api/add/contact', function (req, res, next) {
   var name = req.body.name

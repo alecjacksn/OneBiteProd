@@ -83,7 +83,7 @@ class Header extends Component {
           <div className="header-nav-container">
             <div className="header-nav-main-div">
               <Link to="/onebite/products">Products</Link>
-              <span>About</span>
+              <Link to="/about">About</Link>
               <Link to="/cart">
                 Cart{this.props.cart ? <span id="header-cart-id">({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
             </div>

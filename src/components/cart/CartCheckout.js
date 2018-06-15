@@ -272,7 +272,7 @@ class CartCheckout extends Component {
           <div className="checkout-shipping-review-container">
             {
               this.state.tokenFinished ?
-                <div className="testtesttest">
+                <div className="checkout-shipping-review-div">
                   <div className="checkout-review-info-container">
                     <div className="checkout-review-spans">
                       <span>Name</span>

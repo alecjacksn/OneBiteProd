@@ -40,7 +40,7 @@ export function getProductsInCart(cart) {
 }
 
 export function SubTotalCalculator(cartItems) {
-  if (cartItems) {    
+  if (cartItems) {
     if (cartItems.length > 1) {
       Array.prototype.sum = function (prop) {
         var total = 0
@@ -50,7 +50,7 @@ export function SubTotalCalculator(cartItems) {
         return total
       }
       return cartItems.sum("price")
-    }    
+    }
     return cartItems[0] ? cartItems[0].price : ''
   }
   return null
@@ -80,7 +80,7 @@ export function displayProductsInCart(cartItems, removeFunction, removeFromRedux
             </div>
             <div className="cart-item-content">
               <div className="cart-item-content-header">
-                <span>{e.name}</span>
+                <span className="cart-item-product-name">{e.name}</span>
                 <div className="cart-display-pricing-div">
                   <span>{e.displayPrice}</span>
                   <div>
@@ -89,7 +89,9 @@ export function displayProductsInCart(cartItems, removeFunction, removeFromRedux
                   <span>${(parseInt(e.price) * Number(eval(`item${e.id}`))).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')}</span>
                 </div>
               </div>
-              <span onClick={() => showConfirm(i, removeFromReduxFunction, cartFromRedux, clearCart)} className="cart-remove-button">Remove</span>
+              <div className="cart-remove-button-div">
+                <span onClick={() => showConfirm(i, removeFromReduxFunction, cartFromRedux, clearCart)} className="cart-remove-button">Remove</span>
+              </div>
             </div>
           </div>
 
@@ -128,7 +130,7 @@ function submit(index, removeFromRedux, redux, clearCart) {
       },
       {
         label: 'No',
-        onClick: () => {          
+        onClick: () => {
           return null
         }
       }
@@ -140,11 +142,11 @@ function showConfirm(index, removeFromRedux, redux, clearCart) {
   confirm({
     title: 'Do you Want to delete these items?',
     // content: 'Some descriptions',
-    onOk() {      
+    onOk() {
       message.success(`Removed`);
       return removeItemFromCart(index, removeFromRedux, redux, clearCart)
     },
-    onCancel() {      
+    onCancel() {
     },
   });
 }
@@ -191,7 +193,7 @@ export function CountNumberOfItemsInCart(cart, item1, item2, item3, saveCart, ad
       }
       return saveCart(newCartArray[0], addToCart)
     }
-  }  
+  }
 }
 
 

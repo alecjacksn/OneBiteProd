@@ -105,7 +105,7 @@ class Cart extends Component {
         stripeEmail: token.email
 
       }).then(response => {
-        return this.successPayment()        
+        return this.successPayment()
 
       }).catch(err => {
         console.log("ERROR", err)
@@ -146,9 +146,9 @@ class Cart extends Component {
     var item1 = this.props.item1
     var item2 = this.props.item2
     var item3 = this.props.item3
-    var item1SKU = productsList[0].testSKU
-    var item2SKU = productsList[1].testSKU
-    var item3SKU = productsList[2].testSKU
+    var item1SKU = productsList[0].liveSKU
+    var item2SKU = productsList[1].liveSKU
+    var item3SKU = productsList[2].liveSKU
     var name = token.card.name
     var line1 = shippingAddress.billing_address_line1
     var city = shippingAddress.billing_address_city
@@ -185,13 +185,13 @@ class Cart extends Component {
         this.showModal(false)
         return this.redirectFuntion()
       }).catch(err => {
-        console.log("ERROR", err)        
+        console.log("ERROR", err)
       });
   }
 
 
 
-  newUpdate(name, email, job) {  
+  newUpdate(name, email, job) {
     axios.post('/api/add/contact', {
       name: name,
       email: email,
@@ -251,19 +251,20 @@ class Cart extends Component {
             </Select>
           </div>
 
-
-          <StripeCheckout
-            stripeKey={STRIPE_PUB_KEY}
-            token={this.createOrder}
-            shippingAddress={true}
-            billingAddress={true}
-            zipCode={true}
-            receipt_email
-            name="OneBite"
-            disabled={this.state.buttonDisabled}
-            panelLabel="Review Order"
-            label={"Proceed to Checkout"}
-          />
+          <div className="overview-stripe-button-div">
+            <StripeCheckout
+              stripeKey={STRIPE_PUB_KEY}
+              token={this.createOrder}
+              shippingAddress={true}
+              billingAddress={true}
+              zipCode={true}
+              receipt_email
+              name="OneBite"
+              disabled={this.state.buttonDisabled}
+              panelLabel="Review Order"
+              label={"Proceed to Checkout"}
+            />
+          </div>
         </div>
         <Modal
           className="model-cart-waiting"
@@ -272,14 +273,14 @@ class Cart extends Component {
         >
           <Spin size="large" className="ant-d-spinner" />
         </Modal>
-        <div style={{ padding: '30px 10px' }}>
+        <div className="overview-shipping-div">
           <span style={{ paddingRight: '5px' }}>Shipping</span>
           <Tooltip placement="right" title={"Shipping information and options are provided in the next section."}>
             <Icon type="question-circle-o" />
           </Tooltip>
         </div>
         <div className="overview-total-spans">
-          <span>TOTAL</span>
+          <span>Subtotal</span>
           <span>${subTotal}</span>
         </div>
 

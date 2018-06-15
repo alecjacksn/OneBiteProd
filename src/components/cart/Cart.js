@@ -119,16 +119,21 @@ class Cart extends Component {
             <span>Cart</span>
           </div>
           :
-          < div style={{ textAlign: 'right' }}>
-            <span style={{ fontSize: '1.35rem', paddingRight: '25px', fontWeight: '700' }}>Cart</span>
-          </div>
+          // < div style={{ textAlign: 'right' }}>
+          //   <span style={{ fontSize: '1.35rem', paddingRight: '25px', fontWeight: '700' }}>Cart</span>
+          // </div>
+          null
         }
         <div>
           <div className="cart-container">
             <div className="cart-displayed-container">
-              <div style={{ margin: '0 20px', marginTop: '25px', paddingLeft: '20px', paddingBottom: '10px', borderBottom: '1px solid rgba(0,0,0, .4)' }}>
-                <span style={{ fontSize: '1.85em', color: 'rgba(0,0,0, .8)', fontWeight: '400' }}>Items in Your Cart</span>
-              </div>
+              {window.innerWidth < 450 ?
+                null
+                :
+                <div style={{ margin: '0 20px', marginTop: '25px', paddingLeft: '20px', paddingBottom: '10px', borderBottom: '1px solid rgba(0,0,0, .4)' }}>
+                  <span style={{ fontSize: '1.85em', color: 'rgba(0,0,0, .8)', fontWeight: '400' }}>Items in Your Cart</span>
+                </div>
+              }
               {this.countNumberOfItems(this.props.cart)}
               {displayProductsInCart(getProductsInCart(this.props.cart), removeItemFromCart, this.props.addToCart, this.props.cart, this.updateQuantity, this.props.item1, this.props.item2, this.props.item3, this.props.displayItem1, this.props.displayItem2, this.props.displayItem3, this.clearCart)}
             </div>
