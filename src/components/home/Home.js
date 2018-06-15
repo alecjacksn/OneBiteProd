@@ -16,15 +16,17 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }
 
 
 
   render() {
+    console.log("WINDOW WIDTH", window.innerWidth)
+    console.log("x position", window.pageXOffset)
+    console.log("y position", window.pageYOffset)
     return (
-      <div className="home-container">
-        {/* <button onClick={() => this.newUpdate()} style={{ width: '200px', height: '200px', background: 'steelblue' }}>TEST GET RESPONSE</button> */}
+      <div className="home-container">        
         <img src={actualCoverPhoto} alt="#" className="home-img" />
         <Video />
         <FAQ />

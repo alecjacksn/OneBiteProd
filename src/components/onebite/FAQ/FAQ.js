@@ -29,18 +29,18 @@ class FAQ extends Component {
         <div className="faq-main-div">
           <Collapse accordion>
             <Panel style={customPanelStyle} header="What is the OneBite?" key="1">
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '0px 25px 30px 25px' }}>
+              <div className="faq-dropdown-div">
                 <p style={{ fontSize: '16px', color: 'rgba(0,0,0, .8)' }}>The OneBite system is a universal system that will capture the perfect midline and horizontal line angles on the patients face. With the OneBite system the dentist no longer has to be concerned with the bite material setting up in 20 to 30 seconds before the record is taken.</p>
                 <img src={pastvpresent} alt="Past Vs Present" style={{ maxWidth: '70%', maxHeight: '70%', padding: '15px 0', margin: '0 auto' }} />
               </div>
             </Panel>
             <Panel style={customPanelStyle} header="Why should I use OneBite?" key="3">
-              <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '0px 25px 10px 25px' }}>
+              <div className="faq-dropdown-div">
                 <p style={{ fontSize: '16px', color: 'rgba(0,0,0, .8)' }}>With the OneBite system the dentist has the flexibility to continually make adjustments on the line angles without any time restraints. Also, the system is unique because we're able to capture the information of the line angles on patients that have symmetrical or asymmetrical faces.</p>
               </div>
             </Panel>
             <Panel style={customPanelStyle} header="OneBite Movements" key="4">
-              <div style={{ padding: '0px 25px 30px 25px' }}>
+              <div className="faq-dropdown-move">
                 <p style={{ fontSize: '16px', color: 'rgba(0,0,0, .8)', marginBottom: '15px' }}>The OneBite system can be used on symmetrical faces and asymmetrical faces. For symmetrical faces the midline and horizontal bars will have a torque right to left or a movement right to left, maintaining the 90 degree angle. For asymmetrical faces you are able to take off the front knob flip the horizontal bar and with this set up the two bars will be independent from each other and capture angle as needed.</p>
                 <img src={movementPic} alt="OneBite system movements" style={{ maxWidth: '100%', maxHeight: '100%' }} />
               </div>

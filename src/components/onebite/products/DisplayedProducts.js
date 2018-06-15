@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import productsList from './productsList'
 import {connect} from 'react-redux'
 import {addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart} from '../../../ducks/reducer'
-import { message } from 'antd';
+import { message, Button } from 'antd';
 
 const success = () => {
     message.success(`Item Added to Cart`);
@@ -53,7 +53,7 @@ class DisplayedProducts extends Component {
                         <span>{e.displayPrice}</span>
                         <br />
                         <br />
-                        <button onClick={() => this.addToCart(e.id)} className="add-to-cart-button">Add To Cart</button>                    
+                        <Button size={'large'} onClick={() => this.addToCart(e.id)} >Add To Cart</Button>  
                     </div>
                 </div>
             )

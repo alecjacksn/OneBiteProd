@@ -11,7 +11,7 @@ const express = require('express')
   , helmet = require('helmet')
   , request = require('request')
 
-var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
+var stripe = require("stripe")(process.env.TESTSTRIPESECRETKEY)
 
 const app = express();
 app.use(cors());

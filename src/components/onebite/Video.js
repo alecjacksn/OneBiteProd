@@ -15,6 +15,7 @@ class Video extends Component {
 
 
   render() {
+    var mobile = window.innerWidth < 450 ? true : false 
     return (
       <div className="video-container">
         <ReactPlayer
@@ -22,8 +23,8 @@ class Video extends Component {
           url={OneBiteVideoCompressed}
           playing
           muted={true}
-          width='85%'
-          height='85%'
+          width={mobile ? '100%' : '85%'}
+          height={mobile ? '100%' : '85%'}
           controls={this.state.controls}          
           className="home-video-player"
         />

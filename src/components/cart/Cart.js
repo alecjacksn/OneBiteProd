@@ -14,8 +14,8 @@ class Cart extends Component {
     this.saveCart = this.saveCart.bind(this)
   }
 
-  updateQuantity(id, input) {    
-    var inputForParam = input ? input : 0    
+  updateQuantity(id, input) {
+    var inputForParam = input ? input : 0
     if (id === 1) {
       this.props.updateItem1Quantity(Number(inputForParam))
     }
@@ -27,29 +27,29 @@ class Cart extends Component {
     }
   }
 
-  saveCart(arr) {    
+  saveCart(arr) {
     localStorage.setItem('cart', arr)
     return this.props.addToCart(arr)
   }
 
-  clearCart(id){
+  clearCart(id) {
     var cart = this.props.cart
     var filteredArray = _.without(cart, id.toString())
-    if(id === 1){
+    if (id === 1) {
       this.props.updateItem1Quantity(0)
       this.props.showItemInCart(id, false)
     }
-    if(id === 2){
+    if (id === 2) {
       this.props.updateItem2Quantity(0)
       this.props.showItemInCart(id, false)
     }
-    if(id === 3){
+    if (id === 3) {
       this.props.updateItem3Quantity(0)
       this.props.showItemInCart(id, false)
-    }    
-    if(filteredArray[0] === ''){
+    }
+    if (filteredArray[0] === '') {
       var testerArray = filteredArray.shift()
-      
+
     } else {
     }
     return this.saveCart(filteredArray)
@@ -73,8 +73,8 @@ class Cart extends Component {
       var theItem = id === 1 ? item1 : id === 2 ? item2 : id === 3 ? item3 : null
       // gets the difference between the input and the number of that item in the cart
       difference = (theItem > map[id]) ? theItem - map[id] : map[id] - theItem
-      
-    
+
+
       if (!map[id] && theItem > 0) {
         for (var i = 0; i < theItem; i++) {
           newCartArray[0].push(id.toString())
@@ -95,12 +95,12 @@ class Cart extends Component {
         }
         return this.saveCart(newCartArray[0])
       }
-    }    
+    }
   }
 
 
 
-  countNumberOfItems(cart) {    
+  countNumberOfItems(cart) {
     // console.log("IS ARRAY FUNCTION", Array.isArray(cart) ? cart : cart.split(" "))
     if (cart) {
       if (cart.length >= 0) {
@@ -110,12 +110,19 @@ class Cart extends Component {
   }
 
   render() {
-    
+
     return (
+
       <div className="cart-home-container">
-        <div style={{ textAlign: 'right' }}>
-          <span style={{ fontSize: '1.35rem', paddingRight: '25px', fontWeight: '700' }}>Cart</span>
-        </div>
+        {window.innerWidth < 450 ?
+          <div className="mobile-home-products-header">
+            <span>Cart</span>
+          </div>
+          :
+          < div style={{ textAlign: 'right' }}>
+            <span style={{ fontSize: '1.35rem', paddingRight: '25px', fontWeight: '700' }}>Cart</span>
+          </div>
+        }
         <div>
           <div className="cart-container">
             <div className="cart-displayed-container">
@@ -128,7 +135,7 @@ class Cart extends Component {
             <OverView />
           </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
