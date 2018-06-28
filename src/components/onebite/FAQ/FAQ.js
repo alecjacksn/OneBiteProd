@@ -6,6 +6,8 @@ import OneBiteLogo from '../../../images/OneBite Logo 1500 px 600 dpi.png'
 import ReactPlayer from 'react-player'
 import YouTubePlayer from 'react-player/lib/players/YouTube'
 
+import ReactGA from 'react-ga';
+
 const Panel = Collapse.Panel;
 
 const customPanelStyle = {
@@ -27,7 +29,13 @@ class FAQ extends Component {
           <span>Why <img src={OneBiteLogo} className='faq-img' />?</span>
         </div>
         <div className="faq-main-div">
-          <Collapse accordion>
+          <Collapse onChange={() =>
+            ReactGA.event({
+              category: 'FAQ',
+              action: 'Clicked FAQ'              
+            })
+          }
+            accordion>
             <Panel style={customPanelStyle} header="What is the OneBite?" key="1">
               <div className="faq-dropdown-div">
                 <p style={{ fontSize: '16px', color: 'rgba(0,0,0, .8)' }}>The OneBite system is a universal system that will capture the perfect midline and horizontal line angles on the patients face. With the OneBite system the dentist no longer has to be concerned with the bite material setting up in 20 to 30 seconds before the record is taken.</p>
@@ -74,7 +82,7 @@ class FAQ extends Component {
                   </li>
                 <li>
                   When shipping the OneBite, make sure to detach the arch from the rods after your record has been secure.
-Put videos for instructions. (How to mount and how to use)
+  Put videos for instructions. (How to mount and how to use)
                   </li>
                 <div className="faq-video-container">
                   <YouTubePlayer
@@ -97,7 +105,7 @@ Put videos for instructions. (How to mount and how to use)
             </Panel>
           </Collapse>
         </div>
-      </div>
+      </div >
 
     );
   }

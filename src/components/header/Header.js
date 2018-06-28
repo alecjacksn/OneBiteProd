@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart, updateTokenObj, updateOrderRes } from '../../ducks/reducer'
 import OneBiteLogo from '../../images/OneBite Logo 1500 px 600 dpi.png'
 import Burger from '../burger/Burger'
+import ReactGA from 'react-ga'
 import axios from 'axios'
+
+ReactGA.initialize(process.env.REACT_APP_GOOGLE);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 class Header extends Component {
   constructor() {
@@ -27,11 +31,11 @@ class Header extends Component {
     }
     if (localStorage.getItem('orderId')) {
       var orderId = localStorage.getItem('orderId')
-      axios.post('/api/get-order', { token: orderId }).then(res => {        
+      axios.post('/api/get-order', { token: orderId }).then(res => {
         this.props.updateOrderRes(res.data.success)
       })
-      
-    } 
+
+    }
   }
 
   componentWillMount() {
@@ -72,22 +76,46 @@ class Header extends Component {
 
 
   render() {
-
-
     return (
       <div className="header-container">
         <div className="header-main-div">
           <div className="header-logo-div">
-            <Link style={{ color: 'white' }} to="/"><img src={OneBiteLogo} alt="OneBite Logo" className="header-logo" /></Link>
+            <Link onClick={() =>
+              ReactGA.event({
+                category: 'Button Clicked',
+                action: 'OneBite Logo Clicked'
+              })
+            } style={{ color: 'white' }} to="/"><img src={OneBiteLogo} alt="OneBite Logo" className="header-logo" /></Link>
           </div>
           <div className="header-nav-container">
             <div className="header-nav-main-div">
-              <Link to="/onebite/products">Products</Link>
-              <Link to="/about">About</Link>
-              <Link to="/cart">
+              <Link onClick={() =>
+                ReactGA.event({
+                  category: 'Button Clicked',
+                  action: 'Link to Products Page'
+                })
+              } to="/onebite/products">Products</Link>
+              {/* <Link to="/about">About</Link> */}
+              <ReactGA.OutboundLink
+                to="https://juanolivier.gr8.com/"
+                target="_blank"
+                eventLabel="About Page"
+              >About
+                </ReactGA.OutboundLink>
+              <Link onClick={() =>
+                ReactGA.event({
+                  category: 'Button Clicked',
+                  action: 'Link to Cart Page'
+                })
+              } to="/cart">
                 Cart{this.props.cart ? <span id="header-cart-id">({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
             </div>
-            <Burger tabOpen={this.state.tabOpen} />
+            <Burger onClick={() =>
+              ReactGA.event({
+                category: 'Button Clicked',
+                action: 'opened burger tab'
+              })
+            } tabOpen={this.state.tabOpen} />
           </div>
         </div>
       </div>

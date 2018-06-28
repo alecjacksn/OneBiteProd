@@ -9,7 +9,7 @@ import { clearReduxCart, updateOrderObj, updateUserOccupation, updateTokenObj, u
 import productsList from '../onebite/products/productsList'
 import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUB_KEY from '../../constants/stripePubKey'
-
+import ReactGA from 'react-ga'
 import { Tooltip, Select, Icon, Modal, Spin } from 'antd';
 
 import axios from 'axios'
@@ -216,6 +216,10 @@ class Cart extends Component {
       occupation: value,
       buttonDisabled: false
     })
+    ReactGA.event({
+      category: 'Button Clicked',
+      action: `Selected Occupation ${value}`,      
+  })
   }
 
   render() {
@@ -237,6 +241,7 @@ class Cart extends Component {
           <div>
             <span style={{ fontSize: '14px' }}>Occupation (required)</span>
             <Select
+              onClick={() => console.log("SELECT WQAS HIT TOO")}
               showSearch
               style={{ width: '100%', marginTop: '2px' }}
               placeholder="Select an Occupation"
@@ -244,7 +249,7 @@ class Cart extends Component {
               onChange={(e) => this.updateUserJob(e)}
               filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             >
-              <Option value="6aSAY">General Dentist</Option>
+              <Option onClick={() => console.log("THIS WAS HIT", "general dentist")} value="6aSAY">General Dentist</Option>
               <Option value="6aSbe">Prosthodontist</Option>
               <Option value="6aSRi">Dental Technician</Option>
               <Option value="6rLqp">Other</Option>

@@ -115,7 +115,7 @@ const dealersData = [
     companyLogo: france_logo,
     country: 'France',
     companyName: 'Bisico',
-    address: '120, Allée de la Coudoulette Lançon-Provence, France',
+    address: '208 Allée de la Coudoulette Lançon-Provence, France',
     website: 'http://www.bisico.fr',
     phoneNumber: '+33 490 429 292',
     email: 'info@bisico.fr',
@@ -299,15 +299,15 @@ const dealersData = [
     dealerEmail: 'oraldesigndubai@yahoo.com'
   },
   {
-    companyLogo: uk_logo,
-    country: 'United Kington',
+    companyLogo: ireland_logo,
+    country: 'United Kingdom',
     companyName: 'OneBite UK',
     address: '82 Turnstone Road Offerton Stockport Cheshire SK2 5XU United Kingdom',
     website: '',
     phoneNumber: '+44 (0) 7921 395075',
     email: 'sue@suemccallum-inspire.com',
     dealerName: 'Sue McCallum',
-    dealerEmail: 'sue@suemccallum-inspire.com'
+    dealerEmail: 'sue.mccallum@sky.com'
   },
   {
     companyLogo: american_logo,
@@ -315,7 +315,7 @@ const dealersData = [
     companyName: 'Precision Dental Products',
     address: '13925 S. Maple Hollow Circle Draper, Utah 84020',
     website: 'http://www.onebite.com/',
-    phoneNumber: '(801) 891-6996',
+    phoneNumber: '1-866-668-2483',
     email: 'juan@onebite.com',
     dealerName: '',
     dealerEmail: ''

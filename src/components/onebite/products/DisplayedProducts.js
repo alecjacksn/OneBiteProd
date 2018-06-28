@@ -3,7 +3,7 @@ import productsList from './productsList'
 import { connect } from 'react-redux'
 import { addToCart, updateItem1Quantity, updateItem2Quantity, updateItem3Quantity, showItemInCart } from '../../../ducks/reducer'
 import { message, Button } from 'antd';
-
+import ReactGA from 'react-ga'
 const success = () => {
     message.success(`Item Added to Cart`);
 };
@@ -15,15 +15,30 @@ class DisplayedProducts extends Component {
             var currentItem = this.props.item1
             this.props.updateItem1Quantity(++currentItem)
             this.props.showItemInCart(1, true)
+            ReactGA.event({
+                category: 'Button Clicked',
+                action: 'Added item to cart',
+                value: item
+            })
         }
         if (item === 2) {
             var currentItem = this.props.item2
             this.props.updateItem2Quantity(++currentItem)
             this.props.showItemInCart(2, true)
+            ReactGA.event({
+                category: 'Button Clicked',
+                action: 'Added item to cart',
+                value: item
+            })
         }
         if (item === 3) {
             var currentItem = this.props.item3
             this.props.updateItem3Quantity(++currentItem)
+            ReactGA.event({
+                category: 'Button Clicked',
+                action: 'Added item to cart',
+                value: item
+            })
             this.props.showItemInCart(3, true)
         }
         if (localStorage.getItem('cart') != null) {
@@ -35,6 +50,11 @@ class DisplayedProducts extends Component {
         } else {
             localStorage.setItem('cart', item.toString())
             this.props.addToCart(item.toString())
+            ReactGA.event({
+                category: 'Button Clicked',
+                action: 'Added item to cart',
+                value: item
+            })
             return success()
         }
     }
@@ -48,11 +68,11 @@ class DisplayedProducts extends Component {
                         <img className="single-product-img" alt="The Product" src={e.image} />
                     </div>
                     <div className="single-product-info-div">
-                        <span>{e.name}</span>   
-                        {window.innerWidth < 450 ? null :<br />}
-                        <span>{e.displayPrice}</span>           
-                        {window.innerWidth < 450 ? null :<br />}
-                        {window.innerWidth < 450 ? null :<br />}                               
+                        <span>{e.name}</span>
+                        {window.innerWidth < 450 ? null : <br />}
+                        <span>{e.displayPrice}</span>
+                        {window.innerWidth < 450 ? null : <br />}
+                        {window.innerWidth < 450 ? null : <br />}
                         <Button size={'large'} onClick={() => this.addToCart(e.id)} >Add To Cart</Button>
                     </div>
                 </div>

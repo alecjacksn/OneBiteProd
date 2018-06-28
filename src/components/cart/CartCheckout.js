@@ -8,7 +8,7 @@ import mapIcon from '../../images/map-marker.png'
 import { Button, Icon, Spin, Modal } from 'antd';
 import moment from 'moment'
 import axios from 'axios'
-
+import ReactGA from 'react-ga'
 
 
 class CartCheckout extends Component {
@@ -28,7 +28,7 @@ class CartCheckout extends Component {
   }
 
 
-  componentDidMount() {    
+  componentDidMount() {
     this.setState({
       tokenObj: this.props.tokenObj
     })
@@ -38,8 +38,8 @@ class CartCheckout extends Component {
   componentWillMount() {
     var orderId = localStorage.getItem('orderId')
     var tokenId = localStorage.getItem('tokenId')
-    axios.post('/api/get-order', { token: orderId }).then(res => {      
-      this.props.updateOrderRes(res.data.success)      
+    axios.post('/api/get-order', { token: orderId }).then(res => {
+      this.props.updateOrderRes(res.data.success)
       this.setState({
         activeShippingChoice: res.data.success.selected_shipping_method,
         orderRes: res.data.success,
@@ -47,11 +47,11 @@ class CartCheckout extends Component {
         tokenObj: this.props.tokenObj,
         tokenCard: this.props.tokenObj.card
       })
-      axios.post('/api/get-token', { token: tokenId }).then(res => {        
-          this.setState({
-            tokenFinished: true,
-            tokenObj: res.data.success
-          })
+      axios.post('/api/get-token', { token: tokenId }).then(res => {
+        this.setState({
+          tokenFinished: true,
+          tokenObj: res.data.success
+        })
       })
     })
   }
@@ -100,7 +100,7 @@ class CartCheckout extends Component {
     var re = /\b(\d+)(\d{2})\b/;
     var subst = '$1.$2';
     var str = num.toString();
-    if(str.length <= 2){      
+    if (str.length <= 2) {
       return `0.${num}`
     }
     var result = str.replace(re, subst);
@@ -109,13 +109,18 @@ class CartCheckout extends Component {
 
   updateShipping(id, orderId) {
     axios.post('/api/update-order-shipping', { orderId: orderId, shippingId: id })
-      .then(res => {        
+      .then(res => {
         this.props.updateOrderRes(res.data.success)
         this.setState({
           activeShippingChoice: id,
           orderRes: res.data.success
         })
       })
+    ReactGA.event({
+      category: 'Updated Shipping',
+      action: 'Updated shipping option',
+      value: id
+    })
     this.getAmount()
     return this.displayShippingOptions(this.props.orderRes.shipping_methods, this.props.orderRes.selected_shipping_method, this.props.orderRes.id)
   }
@@ -158,10 +163,10 @@ class CartCheckout extends Component {
     })
   }
 
-  getTaxCost(obj) {    
+  getTaxCost(obj) {
     var items = obj.items
-    return items.map((e, i) => {      
-      if (e.description === "Sales tax") {        
+    return items.map((e, i) => {
+      if (e.description === "Sales tax") {
         return `$${this.moneyFormat(e.amount)}`
       }
     })
@@ -174,7 +179,7 @@ class CartCheckout extends Component {
     return this.props.tokenFalse()
   }
 
-  successPayment() {    
+  successPayment() {
     localStorage.clear()
     this.props.clearReduxCart()
     this.props.clearRedux()
@@ -182,14 +187,14 @@ class CartCheckout extends Component {
     // return this.redirectHomeFunction(true)
   };
 
-   success() {
+  success() {
     Modal.success({
-      title: 'Your order has been placed!',      
+      title: 'Your order has been placed!',
     });
     return this.redirectHomeFunction(true)
   }
 
-  errorPayment(data) {    
+  errorPayment(data) {
     alert(`There was an issue with your order. Please contact support@onebite.com. We Apologize for the inconvenience :(`, );
     localStorage.clear()
     this.props.clearReduxCart()
@@ -207,10 +212,14 @@ class CartCheckout extends Component {
     axios.post('/api/pay-for-order', {
       orderId: orderId,
       tokenId: tokenId
-    }).then(response => {      
+    }).then(response => {
       this.setState({
         loading: false
       })
+      ReactGA.event({
+        category: 'PAY Pressed',
+        action: 'Order Placed',        
+    })
       return this.successPayment()
     }).catch(err => {
       console.log("ERROR", err)

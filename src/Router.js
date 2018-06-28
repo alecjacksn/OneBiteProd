@@ -33,21 +33,21 @@ export function alert(){
 export default (
     <Switch>
         {/* EMPLOYEE ROUTES */}
-        <Route exact path='/' onEnter={fireTracking} component={Home} />
-        <Route path='/cart' onEnter={fireTracking} component={Cart} />
-        <Route path='/about' onEnter={fireTracking} component={About} />
-        {/* <Route path='/contact' onEnter={fireTracking} component={Contact} /> */}
-        {/* <Route path='/events' onEnter={ fireTracking } component={Events} /> */}
-        <Route path='/onebite/products' onEnter={fireTracking} component={Products} />
-        {/* <Route path='/onebite/system' onEnter={ fireTracking } component={System} /> */}
-        {/* <Route path='/onebite/functions' onEnter={ fireTracking } component={Functions} /> */}
-        <Route path='/onebite/instructions' onEnter={fireTracking} component={Instructions} />
-        <Route path='/onebite/partners' onEnter={fireTracking} component={Partners} />
-        {/* <Route path='/Juan-Oliver' onEnter={ fireTracking } component={JuanOliver} /> */}
-        {/* <Route path='/laboratory' onEnter={ fireTracking } component={Laboratory} /> */}
-        {/* <Route path='/philosophy' onEnter={ fireTracking } component={Philosophy} /> */}
-        <Route path='/philosophy' onEnter={fireTracking} component={Philosophy} />
-        <Route path='/cart-checkout' onEnter={fireTracking} onLeave={() => this.alert()} component={CartCheckout} />
+        <Route exact path='/' onUpdate={fireTracking} component={Home} />
+        <Route path='/cart' onUpdate={fireTracking} component={Cart} />
+        <Route path='/about' onUpdate={fireTracking} component={About} />
+        {/* <Route path='/contact' onUpdate={fireTracking} component={Contact} /> */}
+        {/* <Route path='/events' onUpdate={ fireTracking } component={Events} /> */}
+        <Route path='/onebite/products' onUpdate={fireTracking} component={Products} />
+        {/* <Route path='/onebite/system' onUpdate={ fireTracking } component={System} /> */}
+        {/* <Route path='/onebite/functions' onUpdate={ fireTracking } component={Functions} /> */}
+        <Route path='/onebite/instructions' onUpdate={fireTracking} component={Instructions} />
+        <Route path='/onebite/partners' onUpdate={fireTracking} component={Partners} />
+        {/* <Route path='/Juan-Oliver' onUpdate={ fireTracking } component={JuanOliver} /> */}
+        {/* <Route path='/laboratory' onUpdate={ fireTracking } component={Laboratory} /> */}
+        {/* <Route path='/philosophy' onUpdate={ fireTracking } component={Philosophy} /> */}
+        <Route path='/philosophy' onUpdate={fireTracking} component={Philosophy} />
+        <Route path='/cart-checkout' onUpdate={fireTracking} onLeave={() => this.alert()} component={CartCheckout} />
         {/* <Route render={() => {
             return (<div>I'm sorry, the page you're looking for cannot be found. A highly trained monkey is working to build the page as you read this.
         </div>)

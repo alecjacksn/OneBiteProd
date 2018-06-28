@@ -4,6 +4,7 @@ import _ from 'underscore-node'
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { message, Modal } from 'antd';
+import ReactGA from 'react-ga'
 const confirm = Modal.confirm;
 
 
@@ -144,6 +145,11 @@ function showConfirm(index, removeFromRedux, redux, clearCart) {
     // content: 'Some descriptions',
     onOk() {
       message.success(`Removed`);
+      ReactGA.event({
+        category: 'Button Clicked',
+        action: 'Removed item from cart',
+        value: index
+    })
       return removeItemFromCart(index, removeFromRedux, redux, clearCart)
     },
     onCancel() {

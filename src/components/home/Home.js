@@ -4,7 +4,11 @@ import Products from '../onebite/products/Products'
 import { connect } from 'react-redux'
 import FAQ from '../onebite/FAQ/FAQ'
 import Video from '../onebite/Video'
-import axios from 'axios'
+import ReactGA from 'react-ga';
+
+
+ReactGA.initialize(process.env.REACT_APP_GOOGLE);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 class Home extends Component {
   constructor() {
