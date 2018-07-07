@@ -8,6 +8,8 @@ import Burger from '../burger/Burger'
 import ReactGA from 'react-ga'
 import axios from 'axios'
 
+
+
 ReactGA.initialize(process.env.REACT_APP_GOOGLE);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
@@ -118,6 +120,7 @@ class Header extends Component {
             } tabOpen={this.state.tabOpen} />
           </div>
         </div>
+            
       </div>
     )
   }

@@ -35,7 +35,8 @@ class Partners extends Component {
         var x = (
           <div key={i} className="partners-content-container">
             <div className="partners-company-logo-div">
-              <img src={e.companyLogo} className={param === 'Columbia' ? 'partners-columbia-logo' : param === 'United States' ? "partners-us-logo" : "partners-company-logo"} />
+              {/* <img src={e.companyLogo} className={param === 'Columbia' ? 'partners-columbia-logo' : param === 'United States' ? "partners-us-logo" : "partners-company-logo"} /> */}
+              <img src={e.companyLogo} className={e.className} />
             </div>
             <div className="partners-data-center-div">
               <div style={{width: '100%', borderBottom: '1px solid black', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end'}}>

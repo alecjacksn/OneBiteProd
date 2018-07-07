@@ -1874,7 +1874,7 @@ a {
 }
 
 .partners-company-logo{
-  height: 100px;
+  height: auto;
   width: auto;
   max-width: 200px;
   margin-left: auto;
@@ -1885,16 +1885,16 @@ a {
 }
 
 .partners-columbia-logo{
-  height: 100px;
+  height: auto;
   width: auto;
   max-width: 200px;
   background: rgba(0,0,0, .5)
 }
 
 .partners-us-logo{
-  width: 200px;
-  height: 40px;
-  
+  height: auto;
+  width: auto;
+  max-width: 250px;
 }
 
 

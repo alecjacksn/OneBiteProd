@@ -34,7 +34,6 @@ class App extends Component {
         {/* <Burger tabOpen={this.state.tabOpen} /> */}
         <Header className="app-header-comp">
           <HeaderComp />
-
         </Header>
         <Layout>
           <Content>

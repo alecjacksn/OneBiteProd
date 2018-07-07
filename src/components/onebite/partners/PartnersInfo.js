@@ -65,7 +65,8 @@ const dealersData = [
     phoneNumber: '+359 887 630 755',
     email: '',
     dealerName: '',
-    dealerEmail: 'miplant@miplant.bg'
+    dealerEmail: 'miplant@miplant.bg',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: canada_logo,
@@ -76,7 +77,8 @@ const dealersData = [
     phoneNumber: '519-641-3066',
     email: '',
     dealerName: 'John Pittendreigh',
-    dealerEmail: 'jpittendreigh@clinicalresearchdental.com'
+    dealerEmail: 'jpittendreigh@clinicalresearchdental.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: columbia_logo,
@@ -87,7 +89,8 @@ const dealersData = [
     phoneNumber: '+57 23765449',
     email: '',
     dealerName: 'Luz Angela Ramirez',
-    dealerEmail: ''
+    dealerEmail: '',
+    className: 'partners-columbia-logo'
   },
   {
     companyLogo: czech_logo,
@@ -98,7 +101,8 @@ const dealersData = [
     phoneNumber: '+420 725 790 650',
     email: 'info@dynamicdental.cz',
     dealerName: 'Tom',
-    dealerEmail: ''
+    dealerEmail: '',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: finland_logo,
@@ -109,7 +113,8 @@ const dealersData = [
     phoneNumber: '+358 45 639 0289',
     email: 'info@kompodent.fi',
     dealerName: 'Thomas Ahlbom',
-    dealerEmail: 'thomas.ahlbom@kompodent.fi'
+    dealerEmail: 'thomas.ahlbom@kompodent.fi',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: france_logo,
@@ -120,7 +125,8 @@ const dealersData = [
     phoneNumber: '+33 490 429 292',
     email: 'info@bisico.fr',
     dealerName: 'Sebastien Picavet',
-    dealerEmail: 'sebastien.picavet@fip-group.fr'
+    dealerEmail: 'sebastien.picavet@fip-group.fr',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: germany_logo,
@@ -131,7 +137,8 @@ const dealersData = [
     phoneNumber: '+49 7123 9595146',
     email: 'info@dentoo.com',
     dealerName: 'f.schulz@dentoo.com',
-    dealerEmail: 'Florian Schulz'
+    dealerEmail: 'Florian Schulz',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: greece_logo,
@@ -142,7 +149,8 @@ const dealersData = [
     phoneNumber: '+30 21 0522 6221',
     email: 'info@aestheticteam.gr',
     dealerName: 'maya.zafiri@aestheticteam.gr',
-    dealerEmail: 'Maya Zafiri'
+    dealerEmail: 'Maya Zafiri',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: india_logo,
@@ -153,7 +161,8 @@ const dealersData = [
     phoneNumber: '+91 22 6143 7900',
     email: 'purchase@illusiondentallab.com',
     dealerName: 'Dr. Mahesh Jagwani',
-    dealerEmail: 'drmahesh@illusiondental.com'
+    dealerEmail: 'drmahesh@illusiondental.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: ireland_logo,
@@ -164,7 +173,8 @@ const dealersData = [
     phoneNumber: '+44 (0) 7921 395075',
     email: 'sue@suemccallum-inspire.com',
     dealerName: 'Sue McCallum',
-    dealerEmail: 'sue.mccallum@sky.com'
+    dealerEmail: 'sue.mccallum@sky.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: italy_logo,
@@ -175,7 +185,8 @@ const dealersData = [
     phoneNumber: '+39 02 3830 2985',
     email: 'nikodent@tin.it',
     dealerName: 'Thomas Gatti',
-    dealerEmail: 'nikodent@tin.it'
+    dealerEmail: 'nikodent@tin.it',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: japan_english_logo,
@@ -186,7 +197,8 @@ const dealersData = [
     phoneNumber: '+81-76-278-8802',
     email: '',
     dealerName: '',
-    dealerEmail: ''
+    dealerEmail: '',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: japan_logo,
@@ -197,7 +209,8 @@ const dealersData = [
     phoneNumber: '+81 72-961-8835',
     email: 'info@nikken-di.jp',
     dealerName: 'Yutaka Iwakuma',
-    dealerEmail: ''
+    dealerEmail: '',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: mexico_logo,
@@ -208,7 +221,8 @@ const dealersData = [
     phoneNumber: '(044) 222 429 6989',
     email: '',
     dealerName: '',
-    dealerEmail: ''
+    dealerEmail: '',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: morocco_logo,
@@ -219,7 +233,8 @@ const dealersData = [
     phoneNumber: '+212 619-111880',
     email: 'megagenmaroc@gmail.com',
     dealerName: 'Kacem Lahlou',
-    dealerEmail: 'lahloukacem@gmail.com'
+    dealerEmail: 'lahloukacem@gmail.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: portugal_logo,
@@ -230,7 +245,8 @@ const dealersData = [
     phoneNumber: '+351 223 756 052',
     email: 'geral@megagen.pt',
     dealerName: 'Pedro Taveira',
-    dealerEmail: 'Pedrotaveira@megagen.pt'
+    dealerEmail: 'Pedrotaveira@megagen.pt',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: romania_logo,
@@ -241,7 +257,8 @@ const dealersData = [
     phoneNumber: '0257.254.638',
     email: 'office@doriotdent.ro',
     dealerName: 'Anca.szabo@doriotdent.ro',
-    dealerEmail: 'Anca Lang'
+    dealerEmail: 'Anca Lang',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: serbia_logo,
@@ -252,7 +269,8 @@ const dealersData = [
     phoneNumber: '+381 63 327 260',
     email: 'mr.dejanristeski@gmail.com',
     dealerName: 'Dejan Risteski',
-    dealerEmail: 'mr.dejanristeski@gmail.com'
+    dealerEmail: 'mr.dejanristeski@gmail.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: africa_logo,
@@ -263,7 +281,8 @@ const dealersData = [
     phoneNumber: '0027 11 2387114',
     email: 'info@virgindental.co.za',
     dealerName: 'Christiaan de Jager',
-    dealerEmail: 'cddejager@telkomsa.net'
+    dealerEmail: 'cddejager@telkomsa.net',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: spain_logo,
@@ -274,7 +293,8 @@ const dealersData = [
     phoneNumber: '+34 654 80 62 97',
     email: 'oscar@ondentalservice.com',
     dealerName: 'Jose Antonio Checa',
-    dealerEmail: 'ja.checa@wanadoo.es'
+    dealerEmail: 'ja.checa@wanadoo.es',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: ukraine_logo,
@@ -285,7 +305,8 @@ const dealersData = [
     phoneNumber: '+380 44 507-2184',
     email: 'info@yamamoto.com.ua',
     dealerName: 'Vlad Isakov',
-    dealerEmail: 'v.isakov@yamamoto.com.ua'
+    dealerEmail: 'v.isakov@yamamoto.com.ua',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: uae_logo,
@@ -296,7 +317,8 @@ const dealersData = [
     phoneNumber: '+971 4 362 4832',
     email: 'oraldesign_jlt@hotmail.com',
     dealerName: 'Lamberto Villani',
-    dealerEmail: 'oraldesigndubai@yahoo.com'
+    dealerEmail: 'oraldesigndubai@yahoo.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: ireland_logo,
@@ -307,7 +329,8 @@ const dealersData = [
     phoneNumber: '+44 (0) 7921 395075',
     email: 'sue@suemccallum-inspire.com',
     dealerName: 'Sue McCallum',
-    dealerEmail: 'sue.mccallum@sky.com'
+    dealerEmail: 'sue.mccallum@sky.com',
+    className: 'partners-company-logo'
   },
   {
     companyLogo: american_logo,
@@ -318,7 +341,8 @@ const dealersData = [
     phoneNumber: '1-866-668-2483',
     email: 'juan@onebite.com',
     dealerName: '',
-    dealerEmail: ''
+    dealerEmail: '',
+    className: 'partners-us-logo'
   },
 ]
 

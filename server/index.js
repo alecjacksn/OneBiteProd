@@ -157,10 +157,7 @@ app.post('/api/add/contact', function (req, res, next) {
   var name = req.body.name
   var email = req.body.email
   var job = req.body.job
-  console.log("NAME", name)
-  console.log("email", email)
-  console.log("job", job)
-  console.log("THIS WAS HIT")
+ 
 
 
   request({
@@ -182,7 +179,7 @@ app.post('/api/add/contact', function (req, res, next) {
       return console.error('upload failed:', err);
     } else {
       // console.log("HET IT WORKED", httpResponse)
-      console.log("BODY", body)
+      
     }
   });
 
