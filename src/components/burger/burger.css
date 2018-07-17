@@ -68,8 +68,8 @@
 
       .burger-basic-nav{
         /* margin: 15px 0; */
-        color: rgba(0,0,0, .5);
-        font-size: 1rem;
+        color: rgba(0,0,0, .6);
+        font-size: 1em;
         font-weight: 400;
         line-height: 30px !important;
       }

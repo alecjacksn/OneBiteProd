@@ -200,18 +200,18 @@ const dealersData = [
     dealerEmail: '',
     className: 'partners-company-logo'
   },
-  {
-    companyLogo: japan_logo,
-    country: 'Japan',
-    companyName: 'Nikken Dental Laboratories Company',
-    address: '1-27-12, Imagome, Higashiosaka City, Osaka, 578-0903 Japan',
-    website: '',
-    phoneNumber: '+81 72-961-8835',
-    email: 'info@nikken-di.jp',
-    dealerName: 'Yutaka Iwakuma',
-    dealerEmail: '',
-    className: 'partners-company-logo'
-  },
+  // {
+  //   companyLogo: japan_logo,
+  //   country: 'Japan',
+  //   companyName: 'Nikken Dental Laboratories Company',
+  //   address: '1-27-12, Imagome, Higashiosaka City, Osaka, 578-0903 Japan',
+  //   website: '',
+  //   phoneNumber: '+81 72-961-8835',
+  //   email: 'info@nikken-di.jp',
+  //   dealerName: 'Yutaka Iwakuma',
+  //   dealerEmail: '',
+  //   className: 'partners-company-logo'
+  // },
   {
     companyLogo: mexico_logo,
     country: 'Mexico',

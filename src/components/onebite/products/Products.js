@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import DisplayedProducts from './DisplayedProducts'
 import { Link } from 'react-router-dom'
+import {Button} from 'antd'
 
 class Products extends Component {
     render() {
@@ -26,7 +27,7 @@ class Products extends Component {
                             </div>
                         </div>
                         <div className="products-checkout-div">
-                            <Link to="/cart" className="checkout-button">CART</Link>
+                        <Button size={'large'}> <Link to="/cart" className="checkout-button">Cart </Link></Button>
                         </div>
                     </div>
                 </div>

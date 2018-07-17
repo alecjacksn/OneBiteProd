@@ -7,8 +7,8 @@ import OneBiteLogo from '../../images/OneBite Logo 1500 px 600 dpi.png'
 import Burger from '../burger/Burger'
 import ReactGA from 'react-ga'
 import axios from 'axios'
-
-
+import MaterialMenu from '../burger/MaterialMenu'
+import Menu from '@material-ui/icons/Menu';
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE);
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -20,7 +20,8 @@ class Header extends Component {
     this.state = {
       tabOpen: false
     }
-
+    this.toggleDrawer = this.toggleDrawer.bind(this)
+    this.closeDrawer = this.closeDrawer.bind(this)
   }
 
 
@@ -74,7 +75,19 @@ class Header extends Component {
     // console.log("VAR ITEM 3", item3)
     this.props.addToCart(cart)
   }
+  
+  toggleDrawer(open){
+    console.log("THIS WAS HIT", open)
+    this.setState({
+      tabOpen: open
+    })
+  }
 
+  closeDrawer(){
+    this.setState({
+      tabOpen: false
+    })
+  }
 
 
   render() {
@@ -112,15 +125,19 @@ class Header extends Component {
               } to="/cart">
                 Cart{this.props.cart ? <span id="header-cart-id">({Number(this.props.item1) + Number(this.props.item2) + Number(this.props.item3)})</span> : "(0)"}</Link>
             </div>
-            <Burger onClick={() =>
+            {/* <Burger onClick={() =>
               ReactGA.event({
                 category: 'Button Clicked',
                 action: 'opened burger tab'
               })
-            } tabOpen={this.state.tabOpen} />
+            } tabOpen={this.state.tabOpen} /> */}
+            <div>
+              <Menu style={{fontSize: '25px', color: 'white', marginTop: '20px', marginLeft: '10px'}} onClick={() => this.toggleDrawer(!this.state.tabOpen)} />
+              <MaterialMenu tabOpen={this.state.tabOpen} toggleDrawer={this.closeDrawer}/>
+            </div>
           </div>
         </div>
-            
+
       </div>
     )
   }

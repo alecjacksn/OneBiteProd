@@ -10,18 +10,23 @@ import productsList from '../onebite/products/productsList'
 import StripeCheckout from 'react-stripe-checkout';
 import STRIPE_PUB_KEY from '../../constants/stripePubKey'
 import ReactGA from 'react-ga'
-import { Tooltip, Select, Icon, Modal, Spin } from 'antd';
-
+import { Tooltip, Select, Icon, Modal, Spin, message } from 'antd';
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-
+import dealers from '../onebite/partners/PartnersInfo'
 
 const Option = Select.Option;
 const CURRENCY = 'USD';
-const generalDentistId = "6aSAY"
-const prosthodontistId = "6aSbe"
-const dentalTechnicianId = "6aSRi"
-const otherId = "6rLqp"
+// const generalDentistId = "6aSAY"
+// const prosthodontistId = "6aSbe"
+// const dentalTechnicianId = "6aSRi"
+// const otherId = "6rLqp"
 
+
+
+const error = (redirectToPartners, e) => {
+  message.error(<span style={{fontSize: '1.1em'}}>Unfortunately we don't handle orders in {e}. Please click <a style={{ color: 'steelblue', fontWeight: '500', fontSize: '1.15em' }} onClick={() => redirectToPartners()}>Here</a> to find a dealer in your region</span>, 15);
+};
 
 class Cart extends Component {
   constructor() {
@@ -32,11 +37,14 @@ class Cart extends Component {
       buttonDisabled: true,
       occupation: '',
       redirectToCheckout: false,
-      visible: false
+      visible: false,
+      location: '',
+      redirectToPartners: false
     }
     this.onToken = this.onToken.bind(this)
     this.redirectHomeFunction = this.redirectHomeFunction.bind(this)
     this.createOrder = this.createOrder.bind(this)
+    this.redirectToPartners = this.redirectToPartners.bind(this)
   }
 
 
@@ -68,6 +76,13 @@ class Cart extends Component {
 
 
 
+  redirectToPartners() {
+    message.destroy()
+    console.log("THIS WAS HIT")
+    this.setState({
+      redirectToPartners: true
+    })
+  }
 
 
 
@@ -209,7 +224,14 @@ class Cart extends Component {
       redirectToCheckout: true
     })
   }
-
+  
+  CheckoutButton(){
+    if(this.state.location === 'United States' && this.state.occupation !== false){
+      return true
+    } else {
+      return false
+    }
+  }
 
   updateUserJob(value) {
     this.setState({
@@ -218,13 +240,39 @@ class Cart extends Component {
     })
     ReactGA.event({
       category: 'Button Clicked',
-      action: `Selected Occupation ${value}`,      
-  })
+      action: `Selected Occupation ${value}`,
+    })
   }
+
+  updateUserLocation(value) {
+    if (value === 'United States') {
+      console.log("TRUEEEE")
+      this.setState({
+        location: value
+      })
+    } else {
+      this.setState({
+        location: value
+      })
+      return error(this.redirectToPartners, value)
+    }
+  }
+
+  getLocations() {
+    var mappedLocations = dealers
+    var displayArr = []
+    mappedLocations.dealers.forEach((e, i) => {
+      var x = (<Option key={i} value={e.country}>{e.country}</Option>)
+      displayArr.push(x)
+    })
+    return displayArr
+  }
+
 
   render() {
     const subTotal = SubTotalCalculator(getProductsInCart(this.props.cart)) ? SubTotalCalculator(getProductsInCart(this.props.cart)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : "0.00"
     const amount = SubTotalCalculator(getProductsInCart(this.props.cart)) ? Number(SubTotalCalculator(getProductsInCart(this.props.cart)).toString() + '00') : null
+
 
     if (this.state.redirectHome) {
       return <Redirect push to='/' />;
@@ -234,11 +282,16 @@ class Cart extends Component {
       return <Redirect push to='/cart-checkout' />;
     }
 
+    if (this.state.redirectToPartners) {
+      return <Redirect push to='/onebite/partners' />;
+    }
+
     return (
       <div className="overview-container">
+
         <div className="overview-checkout">
 
-          <div>
+          <div >
             <span style={{ fontSize: '14px' }}>Occupation (required)</span>
             <Select
               onClick={() => console.log("SELECT WQAS HIT TOO")}
@@ -249,10 +302,25 @@ class Cart extends Component {
               onChange={(e) => this.updateUserJob(e)}
               filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
             >
-              <Option onClick={() => console.log("THIS WAS HIT", "general dentist")} value="6aSAY">General Dentist</Option>
+              <Option value="6aSAY">General Dentist</Option>
               <Option value="6aSbe">Prosthodontist</Option>
               <Option value="6aSRi">Dental Technician</Option>
               <Option value="6rLqp">Other</Option>
+            </Select>
+          </div>
+
+          <div className={this.state.location === '' ? null : this.state.location === 'United States' ? "select-country-div" : "select-country-div-disabled"}>
+            <span style={{ fontSize: '14px' }}>Select Country (required)</span>
+            <Select
+              onClick={() => console.log("SELECT WQAS HIT TOO")}
+              showSearch
+              style={{ width: '100%', marginTop: '2px' }}
+              placeholder="Select Your location"
+              optionFilterProp="children"
+              onChange={(e) => this.updateUserLocation(e)}
+              filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+            >
+              {this.getLocations()}
             </Select>
           </div>
 
@@ -265,7 +333,7 @@ class Cart extends Component {
               zipCode={true}
               receipt_email
               name="OneBite"
-              disabled={this.state.buttonDisabled}
+              disabled={(this.state.location === 'United States' && this.state.occupation !== '' ) ? false : true}
               panelLabel="Review Order"
               label={"Proceed to Checkout"}
             />
