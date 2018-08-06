@@ -206,6 +206,8 @@ class CartCheckout extends Component {
   checkoutAndPay() {
     var orderId = this.state.orderRes.id
     var tokenId = this.state.tokenObj.id
+    var shippingOptions = this.state.orderRes.shipping_methods;
+    var activeShippingChoice = this.state.orderRes.selected_shipping_method
     this.setState({
       loading: true
     })
@@ -218,8 +220,14 @@ class CartCheckout extends Component {
       })
       ReactGA.event({
         category: 'PAY Pressed',
-        action: 'Order Placed',        
-    })
+        action: 'Order Placed',
+      })
+      ReactGA.plugin.execute('ecommerce', 'addTransaction', {
+        id: orderId,
+        revenue: this.getAmount().replace(/[^\d.-]/g, ''),
+        shipping: this.getShippingCost(shippingOptions, activeShippingChoice).join().replace(/[^\d.-]/g, ''),
+        tax: this.getTaxCost(this.state.orderRes).join().replace(/[^\d.-]/g, '')
+      });
       return this.successPayment()
     }).catch(err => {
       console.log("ERROR", err)
@@ -249,7 +257,9 @@ class CartCheckout extends Component {
     if (this.state.redirectHome) {
       return <Redirect push to='/' />;
     }
-
+    // console.log("ORDER AMOUNT", this.getAmount())
+    // console.log("TAX AMOUNT", this.getTaxCost(this.state.orderRes))
+    // console.log("TAX AMOUNT", this.getShippingCost(shippingOptions, activeShippingChoice))
     return (
       <div className="checkout-home-container">
         <div className="checkout-home-top-div">

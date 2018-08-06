@@ -82,7 +82,7 @@ const dealersData = [
   },
   {
     companyLogo: columbia_logo,
-    country: 'Columbia',
+    country: 'Colombia',
     companyName: 'Grupo Protec',
     address: 'Calle 3a # 34-36 San Fernando Santiago de Cali, Colombia',
     website: 'www.grupoproteclab.com',
@@ -358,7 +358,7 @@ const countriesData = [
     flag: canada_flag
   },
   {
-    name: 'Columbia',
+    name: 'Colombia',
     flag: columbia_flag
   },
   {

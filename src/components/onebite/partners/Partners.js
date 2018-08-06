@@ -3,11 +3,6 @@ import dealerInfo from './PartnersInfo'
 import { Collapse } from 'antd';
 
 
-import bulgaria from './partnersImages/american-flag.png'
-import canada from './partnersImages/canada-flag-2.jpg'
-import columbia from './partnersImages/colombia-flag.png'
-import czech_republic from './partnersImages/czech-flag.png'
-
 
 const Panel = Collapse.Panel;
 
