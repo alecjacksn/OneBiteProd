@@ -10,6 +10,6 @@ module.exports = {
   
   logout: (req, res) => {
       req.logOut();
-      return res.redirect(302, 'http://localhost:3000/#/');
+      return res.redirect(302, 'https://www.onebite.com/#/');
   }
 }
