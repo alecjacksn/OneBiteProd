@@ -5,6 +5,8 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { message, Modal } from 'antd';
 import ReactGA from 'react-ga'
+import axios from 'axios'
+
 const confirm = Modal.confirm;
 
 
@@ -272,7 +274,11 @@ export function createOrdersObj(
 }
 
 
-
+export function getUserObject(updadeObj, obj){
+  axios.get('/login/user').then(res => {
+    return res.data
+  })
+}
 
 
 

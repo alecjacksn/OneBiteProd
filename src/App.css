@@ -1714,6 +1714,18 @@ html, body {
 
 /*                Header.js      ***********************************/
 
+.ant-dropdown-link {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  margin-top: 18px;
+}
+
+.ant-dropdown-link > span{
+  margin-top: -18px !important
+}
+
+
 
 .header-container{
   display: flex;
@@ -1811,6 +1823,124 @@ a {
 
 
 
+/*                UserProfile.js      ***********************************/
+
+.user-profile-container{
+  width: 100vw;
+  height: 100vh;
+  background: rgb(250, 250, 250);
+  display: flex;
+  justify-content: center;
+}
+
+
+.user-profile-box-container{
+  background: #fff;
+  width: 856px;
+  height: 556px; 
+  margin-top: 60px;
+  border: 1px solid #dbdbdb;
+  display: flex;
+  
+}
+
+.user-profile-left-side{
+  width: 30%;
+  height: 100%;
+  
+  border-right: 1px solid #dbdbdb;
+
+}
+
+.user-edit-selected-div{
+  border-left: 2px solid #262626;
+  display: block;
+  font-size: 16.5px;
+  height: 100%;
+  line-height: 20px;
+  padding: 16px 16px 16px 30px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #262626;
+}
+
+/* .user-left-buttons-div{
+  border-left: 2px solid transparent;
+  display: block;
+  font-size: 16px;
+  height: 100%;
+  line-height: 20px;
+  padding: 16px 16px 16px 30px;
+} */
+
+.user-edit-profile-div{
+  border-left: 2px solid transparent;
+  display: block;
+  font-size: 16px;
+  height: 100%;
+  line-height: 20px;
+  padding: 16px 16px 16px 30px;
+  cursor: pointer;
+}
+
+.user-edit-profile-div:hover{
+  background: rgb(250, 250, 250);
+  border-left: 2px solid rgb(219, 219, 219)
+}
+
+
+.user-edit-profile-div span {
+  color: #262626;
+  font-size: 16px;
+}
+
+.user-profile-content-container{
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+
+
+
+/*                EditProfile.js      ***********************************/
+
+
+.edit-profile-container{
+  display: flex;
+  flex-direction: column;
+  margin: 50px 75px 50px 25px;
+}
+
+.edit-profile-input-div{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.edit-profile-input-div span{
+  margin-right: 40px;
+  width: 150px;
+  text-align: right;
+  color: #262626;
+  font-weight: 700;
+}
+
+.edit-profile-input-div input{
+  font-size: 16px;
+  color: #262626
+}
+
+
+.edit-save-button-div{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30px;
+}
 
 
 

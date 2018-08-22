@@ -14,6 +14,10 @@ import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import Info from '@material-ui/icons/Info';
 import Products from '@material-ui/icons/AddShoppingCart';
 import Map from '@material-ui/icons/Place';
+import Person from '@material-ui/icons/Person'
+import AddPerson from '@material-ui/icons/PersonAdd'
+import Exit from '@material-ui/icons/ExitToApp'
+
 
 const styles = {
   list: {
@@ -54,7 +58,7 @@ class TemporaryDrawer extends Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log("PROPS FROM HEADER", this.props.user)
     return (
 
       <div>
@@ -70,6 +74,38 @@ class TemporaryDrawer extends Component {
                 onKeyDown={() => this.props.toggleDrawer()}
               >
                 <div className={classes.list}>
+                  {!this.props.user
+                    ?
+                    <div className={classes.div}>
+                      <Person className={classes.icon} />
+                      <div><a className="burger-basic-nav" href={process.env.REACT_APP_LOGIN}>Login</a></div>
+                    </div>
+                    :
+                    <div>
+                      <div className={classes.div}>
+                        <Person className={classes.icon} />
+                        <div><Link className="burger-basic-nav" to="/user/profile">Profile</Link></div>
+                      </div>
+                      <div className={classes.div}>
+                        <Exit className={classes.icon} />
+                        <div><a className="burger-basic-nav" href={process.env.REACT_APP_LOGOUT} >Logout</a></div>
+                      </div>
+                    </div>
+                  }
+
+
+
+                  {!this.props.user
+                    ? <div className={classes.div}>
+                      <AddPerson className={classes.icon} />
+                      <div>
+                        <a className="burger-basic-nav" href={process.env.REACT_APP_LOGIN}>Sign Up</a>
+                      </div>
+                    </div>
+                    : null
+                  }
+
+                  <Divider />
                   {/* <Divider /> */}
                   {/* <span className="burger-oneBite">OneBite</span>
                   <Divider /> */}
@@ -124,7 +160,7 @@ class TemporaryDrawer extends Component {
                       })
                     } className="burger-basic-nav" id="home" to="/onebite/partners">International Dealers</Link>
                   </div>
-                    <Divider />
+                  <Divider />
                 </div>
               </div>
             </Drawer>

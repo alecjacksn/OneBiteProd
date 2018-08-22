@@ -12,7 +12,7 @@ class BurgerContent extends Component {
       <div style={{ width: 256 }}>
 
         <Menu
-          defaultSelectedKeys={['1']}
+          // defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
           mode="inline"
           theme="light"

@@ -14,6 +14,7 @@ import Laboratory from './components/precision/Laboratory'
 import Philosophy from './components/precision/Philosophy'
 import Products from './components/onebite/products/Products'
 import CartCheckout from './components/cart/CartCheckout'
+import UserProfile from './components/user/UserProfile'
 import ReactGA from 'react-ga';
 
 
@@ -43,6 +44,7 @@ export default (
         {/* <Route path='/onebite/functions' onUpdate={ fireTracking } component={Functions} /> */}
         <Route path='/onebite/instructions' onUpdate={fireTracking} component={Instructions} />
         <Route path='/onebite/partners' onUpdate={fireTracking} component={Partners} />
+        <Route path='/user/profile' onUpdate={fireTracking} component={UserProfile} />
         {/* <Route path='/Juan-Oliver' onUpdate={ fireTracking } component={JuanOliver} /> */}
         {/* <Route path='/laboratory' onUpdate={ fireTracking } component={Laboratory} /> */}
         {/* <Route path='/philosophy' onUpdate={ fireTracking } component={Philosophy} /> */}

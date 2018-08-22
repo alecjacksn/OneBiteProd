@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-
-
+const auth_controller = require('./auth_controller')
+const user_controller = require('./user_controller')
 const express = require('express')
   , SERVER_CONFIGS = require('./const/server')
   , configureServer = require('./server')
@@ -10,6 +10,10 @@ const express = require('express')
   , cors = require('cors')
   , helmet = require('helmet')
   , request = require('request')
+  , passport = require('passport')
+  , massive = require('massive')
+  , Auth0Strategy = require('passport-auth0')
+  , session = require('express-session')
 
 var stripe = require("stripe")(process.env.LIVESTRIPESECRETKEY)
 
@@ -25,6 +29,86 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
+massive(process.env.CONNECTIONSTRING).then(db => {
+  app.set('db', db);
+})
+
+
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  expires: 172800000
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+////////////////////////////    Authentication \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+passport.use(new Auth0Strategy({
+  domain: process.env.AUTH_DOMAIN,
+  clientID: process.env.AUTH_CLIENT_ID,
+  clientSecret: process.env.AUTH_CLIENT_SECRET,
+  callbackURL: process.env.AUTH_CALLBACK
+}, function (accessToken, refreshToken, extraParams, profile, done) {
+  const db = app.get('db');
+  db.users.find_user(profile.id).then(user => {
+      if (user[0]) {
+          userStuff = true
+          return done(null, user);
+      } else {
+          userStuff =  false
+          db.users.create_user([profile.displayName, profile.id, profile.picture, profile.emails[0].value])
+              .then(user => {
+                  return done(null, user);
+              })
+      }
+  })
+}))
+
+
+passport.serializeUser((user, done) => {
+  if(user[0].user_company === null){
+      userStuff = false
+  } else {userStuff =  true}
+  done(null, user);
+})
+
+// USER COMES FROM SESSION - INVOKED ON EVERY ENDPOINT.
+passport.deserializeUser((obj, done) => {
+  return done(null, obj[0]);
+})
+
+app.get('/auth', passport.authenticate('auth0'));
+
+
+app.get('/auth/callback', passport.authenticate('auth0', {
+    successRedirect: 'http://localhost:3000/#/',
+    failureRedirect: 'http://localhost:3000/#/'
+}))
+
+
+app.get('/login/user', auth_controller.login);
+app.get('/logout', auth_controller.logout);
+
+
+app.get('/auth/authorized', (req, res) => {
+  if (!req.user) {
+      return res.status(403).send(false)
+  } else {
+      return res.status(200).send(req.user);
+  }
+})
+
+
+
+app.get('/auth', passport.authenticate('auth0'));
+
+
+
 
 const postStripeCharge = res => (stripeErr, stripeRes) => {
   if (stripeErr) {
@@ -149,6 +233,16 @@ app.listen(SERVER_CONFIGS.PORT, error => {
 app.post('/api/create-order', (req, res) => {
   // console.log("REQ.body", req.body)
   stripe.orders.create(req.body, postStripeOrder(res))
+})
+
+
+app.post('/api/edituser', user_controller.edit_user)
+
+
+// app.get('/api/user/:id', user_controller.user_by_id)
+
+app.post('/api/user/:id', (req, res, next) => {  
+  req.app.get('db').users.user_by_id(req.params.id).then(response => res.status(200).send(response))
 })
 
 

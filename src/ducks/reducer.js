@@ -1,4 +1,6 @@
+import axios from 'axios';
 const initialState = {
+  user: {},
   cart: [],
   item1: '',
   item2: '',
@@ -14,7 +16,9 @@ const initialState = {
   userOccupation: "",
   updatedTokenObj: ""
 }
-
+const UPDATE_OBJ = "UPDATE_OBJ"
+const CLEAR_USER_DATA = "CLEAR_USER_DATA"
+const GET_USER_INFO = "GET_USER_INFO";
 const UPDATE_CART = 'UPDATE_CART';
 const CLEAR_CART = 'CLEAR_CART'
 const UPDATE_ITEM1_QUANTITY = 'UPDATE_ITEM1_QUANTITY'
@@ -30,11 +34,12 @@ const UPDATE_TOKEN_OBJ = 'UPDATE_TOKEN_OBJ'
 const UPDATE_USER_OCCUPATION = 'UPDATE_USER_OCCUPATION'
 const CLEAR_REDUX_SUCCESS = 'CLEAR_REDUX_SUCCESS'
 const TOKEN_FALSE = 'TOKEN_FALSE'
+const UPDATED_USER_OBJ = "UPDATED_USER_OBJ"
 
 
-export function tokenFalse(){
+export function tokenFalse() {
   return {
-    type: TOKEN_FALSE,    
+    type: TOKEN_FALSE,
   }
 }
 
@@ -61,7 +66,7 @@ export function updateOrderRes(obj) {
 
 
 
-export function updateTokenObj(token) {  
+export function updateTokenObj(token) {
   return {
     type: UPDATE_TOKEN_OBJ,
     payload: token
@@ -154,11 +159,55 @@ export function hideWarning() {
   }
 }
 
+export function updateObj(obj) {
+  console.log("HIT", obj)
+  return {
+    type: UPDATE_OBJ,
+    payload: obj
+  }
+}
+
+export function getUserById(id){
+  const userInfoById = axios.get(`/api/getuser/${id}`).then(res => {
+    console.log("RES . DATAAAAA", res.data)
+    return res.data
+  })
+  return {
+    type: UPDATED_USER_OBJ,
+    payload: userInfoById
+  }
+}
+
+export function getUserInfo() {
+
+  const userInfo = axios.get('/login/user').then(res => {
+    return res.data
+  })
+  return {
+    type: GET_USER_INFO,
+    payload: userInfo
+  }
+}
+
+export function clearUser() {
+  return {
+    type: CLEAR_USER_DATA,
+    payload: null
+  }
+}
 
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case UPDATE_OBJ:
+      return Object.assign({}, state, { user: action.payload })
+    case UPDATED_USER_OBJ:
+      return Object.assign({}, state, { user: action.payload })
 
+    case GET_USER_INFO + '_FULFILLED':
+      return Object.assign({}, state, { user: action.payload })
+    case CLEAR_USER_DATA:
+      return Object.assign({}, state, { user: action.payload })
     case UPDATE_CART:
       return Object.assign({}, state, { cart: action.payload })
     case CLEAR_CART:
@@ -188,15 +237,15 @@ export default function reducer(state = initialState, action) {
 
     case UPDATE_TOKEN_OBJ:
       return Object.assign({}, state, { tokenObj: action.payload, updatedTokenObj: true })
-  
+
 
     case UPDATE_USER_OCCUPATION:
       return Object.assign({}, state, { userOccupation: action.payload })
 
     case CLEAR_REDUX_SUCCESS:
-      return Object.assign({}, state, { userOccupation: '', orderObj: {}, orderRes: {}, tokenObj: {}})
+      return Object.assign({}, state, { userOccupation: '', orderObj: {}, orderRes: {}, tokenObj: {} })
 
-      case TOKEN_FALSE:
+    case TOKEN_FALSE:
       return Object.assign({}, state, { updatedTokenObj: false })
 
 
