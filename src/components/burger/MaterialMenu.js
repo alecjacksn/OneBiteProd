@@ -57,8 +57,7 @@ class TemporaryDrawer extends Component {
   };
 
   render() {
-    const { classes } = this.props;
-    console.log("PROPS FROM HEADER", this.props.user)
+    const { classes } = this.props;    
     return (
 
       <div>

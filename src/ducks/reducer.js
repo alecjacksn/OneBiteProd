@@ -83,7 +83,7 @@ export function clearRedux() {
 
 
 export function updateUserOccupation(res) {
-  console.log("REDUCER RES", res)
+  
   return {
     type: UPDATE_USER_OCCUPATION,
     payload: res
@@ -151,16 +151,14 @@ export function showItemInCart(item, tf) {
   }
 }
 
-export function hideWarning() {
-  console.log("THIS WAS CLICKED")
+export function hideWarning() {  
   return {
     type: HIDE_WARNING,
     payload: false
   }
 }
 
-export function updateObj(obj) {
-  console.log("HIT", obj)
+export function updateObj(obj) {  
   return {
     type: UPDATE_OBJ,
     payload: obj
@@ -168,8 +166,7 @@ export function updateObj(obj) {
 }
 
 export function getUserById(id){
-  const userInfoById = axios.get(`/api/getuser/${id}`).then(res => {
-    console.log("RES . DATAAAAA", res.data)
+  const userInfoById = axios.get(`/api/getuser/${id}`).then(res => {    
     return res.data
   })
   return {

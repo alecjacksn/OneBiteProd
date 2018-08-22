@@ -44,7 +44,6 @@ class EditProfile extends Component {
       authid: this.props.user.authid,
       user_id: this.props.user['user_id']
     }
-    console.log("USER ID", data.user_id)
     axios.post('/api/edituser', data)
       .then(axios.post(`/api/user/${data.user_id}`).then(res => {
         this.props.updateObj(res.data[0])      
@@ -65,7 +64,6 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log("USER OBJ", this.props.user)
     var name = this.props.user ? this.props.user.user_name : null
     var email = this.props.user ? this.props.user.email : null
     var phone = this.props.user ? this.props.user.phone : null

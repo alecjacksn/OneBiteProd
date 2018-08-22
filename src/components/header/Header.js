@@ -88,8 +88,7 @@ class Header extends Component {
     this.props.addToCart(cart)
   }
 
-  toggleDrawer(open) {
-    console.log("THIS WAS HIT", open)
+  toggleDrawer(open) {    
     this.setState({
       tabOpen: open
     })
