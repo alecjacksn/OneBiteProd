@@ -56,24 +56,26 @@ passport.use(new Auth0Strategy({
 }, function (accessToken, refreshToken, extraParams, profile, done) {
   const db = app.get('db');
   db.users.find_user(profile.id).then(user => {
-      if (user[0]) {
-          userStuff = true
+    if (user[0]) {
+      userStuff = true
+      return done(null, user);
+    } else {
+      userStuff = false
+      db.users.create_user([profile.id, profile.picture, profile.displayName, profile.emails[0].value])
+        .then(user => {
           return done(null, user);
-      } else {
-          userStuff =  false
-          db.users.create_user([profile.id, profile.picture, profile.displayName, profile.emails[0].value])
-              .then(user => {
-                  return done(null, user);
-              })
-      }
-  })
+        })
+    }
+  }).catch(
+    console.log('error')
+  )
 }))
 
 
 passport.serializeUser((user, done) => {
-  if(user[0].user_company === null){
-      userStuff = false
-  } else {userStuff =  true}
+  if (user[0].user_company === null) {
+    userStuff = false
+  } else { userStuff = true }
   done(null, user);
 })
 
@@ -86,8 +88,8 @@ app.get('/auth', passport.authenticate('auth0'));
 
 
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'https://www.onebite.com/#/',
-    failureRedirect: 'https://www.onebite.com/#/'
+  successRedirect: 'https://www.onebite.com/#/',
+  failureRedirect: 'https://www.onebite.com/#/'
 }))
 
 
@@ -97,9 +99,9 @@ app.get('/logout', auth_controller.logout);
 
 app.get('/auth/authorized', (req, res) => {
   if (!req.user) {
-      return res.status(403).send(false)
+    return res.status(403).send(false)
   } else {
-      return res.status(200).send(req.user);
+    return res.status(200).send(req.user);
   }
 })
 
@@ -241,7 +243,7 @@ app.post('/api/edituser', user_controller.edit_user)
 
 // app.get('/api/user/:id', user_controller.user_by_id)
 
-app.post('/api/user/:id', (req, res, next) => {  
+app.post('/api/user/:id', (req, res, next) => {
   req.app.get('db').users.user_by_id(req.params.id).then(response => res.status(200).send(response))
 })
 
@@ -251,7 +253,7 @@ app.post('/api/add/contact', function (req, res, next) {
   var name = req.body.name
   var email = req.body.email
   var job = req.body.job
- 
+
 
 
   request({
@@ -273,7 +275,7 @@ app.post('/api/add/contact', function (req, res, next) {
       return console.error('upload failed:', err);
     } else {
       // console.log("HET IT WORKED", httpResponse)
-      
+
     }
   });
 
