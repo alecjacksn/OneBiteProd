@@ -48,6 +48,29 @@ app.use(passport.session());
 
 ////////////////////////////    Authentication \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+// passport.use(new Auth0Strategy({
+//   domain: process.env.AUTH_DOMAIN,
+//   clientID: process.env.AUTH_CLIENT_ID,
+//   clientSecret: process.env.AUTH_CLIENT_SECRET,
+//   callbackURL: process.env.AUTH_CALLBACK
+// }, function (accessToken, refreshToken, extraParams, profile, done) {
+//   const db = app.get('db');
+//   db.users.find_user(profile.id).then(user => {
+//     if (user[0]) {
+//       userStuff = true
+//       return done(null, user);
+//     } else {
+//       userStuff = false
+//       db.users.create_user([profile.displayName, profile.emails[0].value, profile.picture, profile.id])
+//         .then(user => {
+//           return done(null, user);
+//         })
+//     }
+//   }).catch(
+//     console.log('error')
+//   )
+// }))
+
 passport.use(new Auth0Strategy({
   domain: process.env.AUTH_DOMAIN,
   clientID: process.env.AUTH_CLIENT_ID,
@@ -56,21 +79,16 @@ passport.use(new Auth0Strategy({
 }, function (accessToken, refreshToken, extraParams, profile, done) {
   const db = app.get('db');
   db.users.find_user(profile.id).then(user => {
-    if (user[0]) {
-      userStuff = true
-      return done(null, user);
-    } else {
-      userStuff = false
-      db.users.create_user([profile.id, profile.picture, profile.displayName, profile.emails[0].value])
-        .then(user => {
-          return done(null, user);
-        })
-    }
-  }).catch(
-    console.log('error')
-  )
-}))
-
+      if (user[0]) {
+          return done(null, user[0]);
+      } else {
+          db.users.create_user([profile.displayName, profile.emails[0].value, profile.picture, profile.id])
+              .then(user => {
+                  return done(null, user[0]);
+              })
+      }
+  })
+}));
 
 passport.serializeUser((user, done) => {
   if (user[0].user_company === null) {
