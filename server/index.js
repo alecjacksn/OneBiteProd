@@ -61,7 +61,7 @@ passport.use(new Auth0Strategy({
           return done(null, user);
       } else {
           userStuff =  false
-          db.users.create_user([profile.displayName, profile.id, profile.picture, profile.emails[0].value])
+          db.users.create_user([profile.id, profile.picture, profile.displayName, profile.emails[0].value])
               .then(user => {
                   return done(null, user);
               })
